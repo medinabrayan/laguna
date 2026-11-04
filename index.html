@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GUAPUCHAS - Un sabor que nace debajo del agua | Laguna de Fúquene</title>
+  
+  <!-- Estilos principales -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Three.js cargado localmente para total fiabilidad y funcionamiento offline -->
+  <script src="js/three.min.js"></script>
+</head>
+<body>
+
+  <!-- Lienzo Three.js para la laguna 3D, peces y efectos de agua -->
+  <div id="three-canvas-container"></div>
+
+  <!-- Capa de la interfaz y la infografía -->
+  <div id="app-viewport">
+
+    <!-- Barra de Controles Interactivos Flotante -->
+    <header class="hud-controls">
+      <button id="btn-audio" class="hud-btn" title="Activar/Desactivar Paisaje Sonoro">
+        <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+        <span id="audio-label">Sonido: Silenciado</span>
+      </button>
+
+      <button id="btn-feed" class="hud-btn" title="Modo Alimentar Guapuchas">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14h2v2h-2v-2zm0-10h2v8h-2V6z"/></svg>
+        <span id="feed-label">Alimentar Peces</span>
+      </button>
+
+      <button id="btn-add-fish" class="hud-btn" title="Añadir más Guapuchas al cardumen">
+        <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+        <span>+ Pez</span>
+      </button>
+
+      <button id="btn-view-mode" class="hud-btn" title="Cambiar a Vista Acuario 3D">
+        <svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+        <span id="view-mode-label">Acuario 3D</span>
+      </button>
+    </header>
+
+    <!-- Región Superior: Pestaña, Título "GUAPUCHAS" y Nota de Fúquene -->
+    <section class="header-region">
+      <!-- Pestaña azul colgante izquierda -->
+      <div class="ribbon-tab">
+        <svg viewBox="0 0 24 24"><path d="M12 2L4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3z"/></svg>
+      </div>
+
+      <!-- Banner Central -->
+      <div class="title-banner">
+        <h1>GUAPUCHAS</h1>
+        <div class="subtitle">Un sabor que nace debajo del agua</div>
+      </div>
+
+      <!-- Nota Superior Derecha -->
+      <div class="header-side-note">
+        <a id="link-fuquene" title="Conocer más sobre Fúquene">Un viaje por Fúquene</a>
+      </div>
+    </section>
+
+    <!-- Tablero de Infografía con Nodos Hexagonales -->
+    <main class="infographic-canvas" id="infographic-board">
+      
+      <!-- Lienzo SVG para las líneas de conexión dinámicas entre hexágonos -->
+      <svg id="connections-svg"></svg>
+
+      <!-- Template reutilizable de hexágono SVG definido dentro de cada nodo -->
+
+      <!-- FILA SUPERIOR / CATEGORÍAS PRINCIPALES (AZULES) -->
+      <div class="hex-node style-blue" id="node-inicio" data-id="inicio" style="left: 17%; top: 75px;">
+        <svg class="hex-shape" viewBox="0 0 100 87">
+          <polygon points="50,2 98,23 98,64 50,85 2,64 2,23" />
+        </svg>
+        <span class="hex-label">Inicio</span>
+      </div>
+
+      <div class="hex-node style-blue" id="node-donde-estamos" data-id="donde-estamos" style="left: 27%; top: 145px;">
+        <svg class="hex-shape" viewBox="0 0 100 87">
+          <polygon points="50,2 98,23 98,64 50,85 2,64 2,23" />
+        </svg>
+        <span class="hex-label">¿Donde<br>estamos?</span>
+      </div>
+
+      <div class="hex-node style-blue" id="node-que-es-guapucha" data-id="que-es-guapucha" style="left: 39%; top: 85px;">
+        <svg class="hex-shape" viewBox="0 0 100 87">
+          <polygon points="50,2 98,23 98,64 50,85 2,64 2,23" />
+        </svg>
+        <span class="hex-label">¿Qué es una<br>guapucha?</span>
+      </div>
+
+      <div class="hex-node style-blue" id="node-del-agua-al-plato" data-id="del-agua-al-plato" style="left: 51%; top: 145px;">
+        <svg class="hex-shape" viewBox="0 0 100 87">
+          <polygon points="50,2 98,23 98,64 50,85 2,64 2,23" />
+        </svg>
+        <span class="hex-label">Del agua al<br>plato</span>
+      </div>
+
+      <div class="hex-node style-blue" id="node-no-esta-en-un-libro" data-id="no-esta-en-un-libro" style="left: 63%; top: 85px;">
+        <svg class="hex-shape" viewBox="0 0 100 87">
+          <polygon points="50,2 98,23 98,64 50,85 2,64 2,23" />
+        </svg>
+        <span class="hex-label">No esta en un<br>libro</span>
+      </div>
+
+      <!-- RAMA 1: IZQUIERDA (TERRITORIO Y TRADICIÓN) -->
+      <div class="hex-node style-white" id="node-escucha-el-territorio" data-id="escucha-el-territorio" style="left: 7.5%; top: 195px;">
+        <!-- Icono de cursor señalando -->
+        <svg class="cursor-pointer-icon" viewBox="0 0 32 32">
+          <path d="M7 2l18 13.5-8.2 1.3 5 8.7-3.8 2.2-5-8.8-4.5 4.5z" fill="#75b5ea" stroke="#255589" stroke-width="2"/>
+        </svg>
+        <svg class="hex-shape" viewBox="0 0 100 87">
+          <polygon points="50,2 98,23 98,64 50,85 2,64 2,23" />
+        </svg>
+        <span class="hex-label">Escucha el<br>territorio</span>
+      </div>
+
+      <div class="hex-node style-white" id="node-agua" data-id="agua" style="left: 18.5%; top: 250px;">
+        <svg class="hex-shape" viewBox="0 0 100 87">
+          <polygon points="50,2 98,23 98,64 50,85 2,64 2,23" />
+        </svg>
+        <span class="hex-label">Agua</span>
+      </div>
+
+      <div class="hex-node style-white" id="node-territorio-comunidad" data-id="territorio-comunidad" style="left: 13%; top: 355px;">
+        <svg class="hex-shape" viewBox="0 0 100 87">
+          <polygon points="50,2 98,23 98,64 50,85 2,64 2,23" />
+        </svg>
+        <span class="hex-label">Territorio y<br>comunidad</span>
+      </div>
+
+      <div class="hex-node style-white" id="node-cocina" data-id="cocina" style="left: 17%; top: 465px;">
+        <svg class="hex-shape" viewBox="0 0 100 87">
+          <polygon points="50,2 98,23 98,64 50,85 2,64 2,23" />
+        </svg>
+        <span class="hex-label">Cocina</span>
+      </div>
+
+      <div class="hex-node style-white" id="node-guapucha" data-id="guapucha" style="left: 11%; top: 575px;">
+        <svg class="hex-shape" viewBox="0 0 100 87">
+          <polygon points="50,2 98,23 98,64 50,85 2,64 2,23" />
+        </svg>
+        <span class="hex-label">Guapucha</span>
+      </div>
+
+      <div class="hex-node style-white" id="node-maiz" data-id="maiz" style="left: 15%; top: 685px;">
+        <svg class="hex-shape" viewBox="0 0 100 87">
+          <polygon points="50,2 98,23 98,64 50,85 2,64 2,23" />
+        </svg>
+        <span class="hex-label">Maíz</span>
+      </div>
+
+      <!-- RAMA 2: CENTRO-IZQUIERDA (IDENTIDAD Y BIOLOGÍA) -->
+      <div class="hex-node style-white" id="node-que-es" data-id="que-es" style="left: 39%; top: 220px;">
+        <svg class="hex-shape" viewBox="0 0 100 87">
+          <polygon points="50,2 98,23 98,64 50,85 2,64 2,23" />
+        </svg>
+        <span class="hex-label">¿Qué es?</span>
+      </div>
+
+      <div class="hex-node style-white" id="node-importancia" data-id="importancia" style="left: 34.5%; top: 325px;">
+        <svg class="hex-shape" viewBox="0 0 100 87">
+          <polygon points="50,2 98,23 98,64 50,85 2,64 2,23" />
+        </svg>
+        <span class="hex-label">Importancia</span>
+      </div>
+
+      <div class="hex-node style-white" id="node-historia" data-id="historia" style="left: 36.5%; top: 435px;">
+        <svg class="hex-shape" viewBox="0 0 100 87">
+          <polygon points="50,2 98,23 98,64 50,85 2,64 2,23" />
+        </svg>
+        <span class="hex-label">Historia</span>
+      </div>
+
+      <div class="hex-node style-white" id="node-tradicion" data-id="tradicion" style="left: 32.5%; top: 545px;">
+        <svg class="hex-shape" viewBox="0 0 100 87">
+          <polygon points="50,2 98,23 98,64 50,85 2,64 2,23" />
+        </svg>
+        <span class="hex-label">Tradición</span>
+      </div>
+
+      <!-- RAMA 3: CENTRO-DERECHA (COCINA Y SABERES) -->
+      <div class="hex-node style-white" id="node-preparacion" data-id="preparacion" style="left: 54%; top: 265px;">
+        <svg class="hex-shape" viewBox="0 0 100 87">
+          <polygon points="50,2 98,23 98,64 50,85 2,64 2,23" />
+        </svg>
+        <span class="hex-label">Preparación</span>
+      </div>
+
+      <div class="hex-node style-white" id="node-saberes" data-id="saberes" style="left: 50.5%; top: 375px;">
+        <svg class="hex-shape" viewBox="0 0 100 87">
+          <polygon points="50,2 98,23 98,64 50,85 2,64 2,23" />
+        </svg>
+        <span class="hex-label">Saberes</span>
+      </div>
+
+      <div class="hex-node style-white" id="node-receta-tradicional" data-id="receta-tradicional" style="left: 54.5%; top: 485px;">
+        <svg class="hex-shape" viewBox="0 0 100 87">
+          <polygon points="50,2 98,23 98,64 50,85 2,64 2,23" />
+        </svg>
+        <span class="hex-label">Receta<br>tradicional</span>
+      </div>
+
+      <!-- RAMA 4: DERECHA (CRÓNICA, MEMORIA Y PESCADORES) -->
+      <div class="hex-node style-white" id="node-cronica" data-id="cronica" style="left: 71%; top: 215px;">
+        <svg class="hex-shape" viewBox="0 0 100 87">
+          <polygon points="50,2 98,23 98,64 50,85 2,64 2,23" />
+        </svg>
+        <span class="hex-label">Cronica</span>
+      </div>
+
+      <div class="hex-node style-white" id="node-el-encuentro-con-la-guapucha" data-id="el-encuentro-con-la-guapucha" style="left: 74.5%; top: 325px;">
+        <svg class="hex-shape" viewBox="0 0 100 87">
+          <polygon points="50,2 98,23 98,64 50,85 2,64 2,23" />
+        </svg>
+        <span class="hex-label">El encuentro<br>con la<br>guapucha</span>
+      </div>
+
+      <div class="hex-node style-white" id="node-voces-del-territorio" data-id="voces-del-territorio" style="left: 77%; top: 435px;">
+        <svg class="hex-shape" viewBox="0 0 100 87">
+          <polygon points="50,2 98,23 98,64 50,85 2,64 2,23" />
+        </svg>
+        <span class="hex-label">Voces del<br>territorio</span>
+      </div>
+
+      <div class="hex-node style-white" id="node-de-la-pesca-a-la-mesa" data-id="de-la-pesca-a-la-mesa" style="left: 75%; top: 545px;">
+        <svg class="hex-shape" viewBox="0 0 100 87">
+          <polygon points="50,2 98,23 98,64 50,85 2,64 2,23" />
+        </svg>
+        <span class="hex-label">De la pesca a<br>la mesa</span>
+      </div>
+
+      <div class="hex-node style-white" id="node-sabores-y-tradicion" data-id="sabores-y-tradicion" style="left: 76.5%; top: 655px;">
+        <svg class="hex-shape" viewBox="0 0 100 87">
+          <polygon points="50,2 98,23 98,64 50,85 2,64 2,23" />
+        </svg>
+        <span class="hex-label">Sabores y<br>tradición</span>
+      </div>
+
+      <div class="hex-node style-white" id="node-una-tradicion-que-permanece" data-id="una-tradicion-que-permanece" style="left: 75%; top: 765px;">
+        <svg class="hex-shape" viewBox="0 0 100 87">
+          <polygon points="50,2 98,23 98,64 50,85 2,64 2,23" />
+        </svg>
+        <span class="hex-label">Una tradición<br>que permanece</span>
+      </div>
+
+    </main>
+
+    <!-- Notificación / Toast de estado interactivo -->
+    <div id="fish-toast" class="fish-toast">
+      <span id="toast-text">¡Toca el agua o acerca el cursor a las Guapuchas para interactuar!</span>
+    </div>
+
+    <!-- Pie de página con créditos bioculturales -->
+    <footer class="footer-note">
+      Investigación y Salvaguarda Biocultural de la Laguna de Fúquene • <em>Grundulus bogotensis</em> • Altiplano Cundiboyacense
+    </footer>
+  </div>
+
+  <!-- Modal Emergente de Contenido -->
+  <div id="content-modal" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <span class="modal-badge" id="modal-badge">Punto de Partida</span>
+        <button id="modal-close" class="modal-close-btn" title="Cerrar">
+          <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+        <h2 class="modal-title" id="modal-title">Título del Nodo</h2>
+        <div class="modal-subtitle" id="modal-subtitle">Subtítulo poético del territorio</div>
+      </div>
+      <div class="modal-body">
+        <div id="modal-custom-audio" style="display: none;">
+          <div class="audio-player-box">
+            <div class="audio-info">
+              <span class="audio-track-title">Paisaje Sonoro de Fúquene</span>
+              <span class="audio-track-desc">Remero, viento andino y murmullo de juncales</span>
+            </div>
+            <button id="modal-audio-btn" class="audio-play-toggle">
+              <svg style="width: 18px; height: 18px; fill: currentColor;" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              <span>Escuchar</span>
+            </button>
+          </div>
+        </div>
+
+        <div id="modal-text">Contenido detallado...</div>
+
+        <div class="modal-stats" id="modal-stats">
+          <!-- Estadísticas inyectadas dinámicamente -->
+        </div>
+
+        <div class="modal-quote" id="modal-quote">
+          "Cita memorable..."
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts del proyecto -->
+  <script src="js/data.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/guapucha.js"></script>
+  <script src="js/water.js"></script>
+  <script src="js/bubbles.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

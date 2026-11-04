@@ -1,0 +1,660 @@
+/* style.css - Estilos inspirados en la infografía de Guapuchas y la Laguna de Fúquene */
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap');
+
+:root {
+  --primary-blue: #275d97;
+  --primary-blue-dark: #1b4573;
+  --primary-blue-light: #4480be;
+  --lake-cyan: #39b7a4;
+  --lake-mint: #bfece4;
+  --gold-accent: #e5973e;
+  --bg-sand: #f6fcfa;
+  --text-dark: #1f3f62;
+  --text-muted: #537599;
+  --white: #ffffff;
+  --glass-bg: rgba(255, 255, 255, 0.88);
+  --glass-border: rgba(43, 96, 153, 0.22);
+  --shadow-soft: 0 12px 36px rgba(27, 69, 115, 0.12);
+  --shadow-hover: 0 18px 40px rgba(39, 93, 151, 0.26);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  background-color: #dcf2ee;
+  font-family: 'Montserrat', sans-serif;
+  color: var(--text-dark);
+  user-select: none;
+}
+
+/* Contenedor del lienzo 3D Three.js */
+#three-canvas-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  pointer-events: auto;
+}
+
+/* Envoltorio principal que contiene la infografía sobre el lienzo 3D */
+#app-viewport {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  pointer-events: none; /* Permite interactuar con los peces bajo el agua excepto en los botones */
+}
+
+/* Barra superior de herramientas y controles flotantes */
+.hud-controls {
+  position: fixed;
+  top: 18px;
+  right: 24px;
+  z-index: 100;
+  display: flex;
+  gap: 10px;
+  pointer-events: auto;
+}
+
+.hud-btn {
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  border: 1.5px solid var(--glass-border);
+  border-radius: 30px;
+  padding: 8px 16px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--primary-blue-dark);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(27, 69, 115, 0.1);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hud-btn:hover {
+  background: var(--white);
+  transform: translateY(-2px);
+  border-color: var(--primary-blue);
+  box-shadow: 0 6px 20px rgba(39, 93, 151, 0.22);
+}
+
+.hud-btn.active {
+  background: var(--primary-blue);
+  color: var(--white);
+  border-color: var(--primary-blue-dark);
+}
+
+.hud-btn svg {
+  width: 17px;
+  height: 17px;
+  fill: currentColor;
+}
+
+/* Banner superior decorativo y título */
+.header-region {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 20px 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: auto;
+}
+
+/* Pestaña decorativa a la izquierda */
+.ribbon-tab {
+  position: absolute;
+  top: 0;
+  left: 30px;
+  width: 60px;
+  height: 70px;
+  background: #3e73ad;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  box-shadow: 0 6px 16px rgba(30, 69, 116, 0.22);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-left: 2px solid rgba(255, 255, 255, 0.3);
+  border-right: 2px solid rgba(255, 255, 255, 0.3);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.ribbon-tab svg {
+  width: 28px;
+  height: 28px;
+  fill: #ffffff;
+  opacity: 0.9;
+}
+
+/* Contenedor tipo píldora central para "GUAPUCHAS" */
+.title-banner {
+  background: linear-gradient(135deg, #275a90 0%, #356fa8 100%);
+  padding: 18px 65px 22px;
+  border-radius: 46px;
+  text-align: center;
+  box-shadow: 0 14px 34px rgba(27, 69, 115, 0.25), inset 0 1px 2px rgba(255, 255, 255, 0.35);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.title-banner:hover {
+  transform: scale(1.02);
+}
+
+.title-banner h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2.7rem;
+  font-weight: 800;
+  letter-spacing: 4px;
+  color: #ffffff;
+  text-shadow: 0 2px 8px rgba(10, 30, 50, 0.3);
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.title-banner .subtitle {
+  font-family: 'Caveat', cursive;
+  font-size: 1.95rem;
+  font-weight: 700;
+  color: #f7fffd;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  margin-top: 2px;
+  letter-spacing: 1px;
+}
+
+/* Nota de cabecera a la derecha: "Un viaje por Fúquene" */
+.header-side-note {
+  position: absolute;
+  top: 42px;
+  right: 170px;
+  text-align: right;
+  pointer-events: auto;
+}
+
+.header-side-note a {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: #1b4573;
+  text-decoration: underline;
+  text-decoration-thickness: 1.8px;
+  text-underline-offset: 4px;
+  letter-spacing: 0.5px;
+  transition: color 0.2s;
+  cursor: pointer;
+}
+
+.header-side-note a:hover {
+  color: var(--lake-cyan);
+}
+
+/* Lienzo SVG para dibujar las líneas de conexión entre hexágonos */
+#connections-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.flow-line {
+  stroke: #2b6099;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  fill: none;
+  opacity: 0.75;
+  transition: stroke 0.3s, stroke-width 0.3s;
+}
+
+.flow-line.pulse {
+  stroke: #39b7a4;
+  stroke-width: 3.2;
+  filter: drop-shadow(0 0 6px rgba(57, 183, 164, 0.8));
+}
+
+/* Tablero de Nodos Hexagonales */
+.infographic-canvas {
+  position: relative;
+  z-index: 20;
+  width: 100%;
+  max-width: 1300px;
+  margin: 10px auto 40px;
+  min-height: 1050px;
+  pointer-events: none; /* Permite interactuar con el agua y los peces entre los hexágonos */
+}
+
+/* Elemento Hexagonal Individual */
+.hex-node {
+  position: absolute;
+  width: 135px;
+  height: 118px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  pointer-events: auto; /* Los hexágonos capturan clics */
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), filter 0.25s;
+  user-select: none;
+}
+
+.hex-node:hover {
+  transform: translateY(-5px) scale(1.08);
+  filter: drop-shadow(0 12px 24px rgba(27, 69, 115, 0.3));
+  z-index: 50;
+}
+
+.hex-node.active-node {
+  transform: translateY(-4px) scale(1.12);
+  filter: drop-shadow(0 0 16px rgba(57, 183, 164, 0.9));
+  z-index: 60;
+}
+
+/* SVG que dibuja el hexágono con su borde y fondo */
+.hex-shape {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 6px 14px rgba(27, 69, 115, 0.12));
+}
+
+/* Hexágono Blanco con borde azul (estilo de nodos secundarios) */
+.hex-node.style-white polygon {
+  fill: #ffffff;
+  stroke: #2a5f97;
+  stroke-width: 2.5;
+  stroke-linejoin: round;
+  transition: all 0.25s;
+}
+
+.hex-node.style-white:hover polygon {
+  fill: #f4faf8;
+  stroke: #1a4573;
+  stroke-width: 3.2;
+}
+
+/* Hexágono Azul Relleno (estilo de categorías principales) */
+.hex-node.style-blue polygon {
+  fill: #2a5f97;
+  stroke: #1f4e80;
+  stroke-width: 2.5;
+  stroke-linejoin: round;
+  transition: all 0.25s;
+}
+
+.hex-node.style-blue:hover polygon {
+  fill: #3471b0;
+  stroke: #ffffff;
+  stroke-width: 2.5;
+}
+
+/* Texto dentro del hexágono */
+.hex-label {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 0 14px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.86rem;
+  font-weight: 600;
+  line-height: 1.25;
+  pointer-events: none;
+}
+
+.hex-node.style-white .hex-label {
+  color: #1f4874;
+}
+
+.hex-node.style-blue .hex-label {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+/* Icono especial de puntero para "Escucha el territorio" como en la imagen original */
+.cursor-pointer-icon {
+  position: absolute;
+  top: 48px;
+  left: -28px;
+  width: 38px;
+  height: 38px;
+  z-index: 30;
+  animation: cursorFloat 2.2s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes cursorFloat {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(-6px, 6px); }
+}
+
+/* Modal Emergente de Información Cultural y Gastronómica */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(14, 38, 64, 0.65);
+  backdrop-filter: blur(8px);
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: auto;
+  padding: 20px;
+}
+
+.modal-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-card {
+  background: var(--white);
+  width: 100%;
+  max-width: 680px;
+  max-height: 88vh;
+  border-radius: 28px;
+  box-shadow: 0 25px 60px rgba(10, 32, 58, 0.4);
+  overflow-y: auto;
+  position: relative;
+  transform: translateY(30px) scale(0.96);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid rgba(43, 96, 153, 0.15);
+}
+
+.modal-overlay.open .modal-card {
+  transform: translateY(0) scale(1);
+}
+
+.modal-header {
+  background: linear-gradient(135deg, #225184 0%, #3269a0 100%);
+  padding: 28px 32px 22px;
+  color: var(--white);
+  position: relative;
+}
+
+.modal-badge {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.modal-title {
+  font-size: 1.85rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.modal-subtitle {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 1.15rem;
+  opacity: 0.92;
+  margin-top: 6px;
+  color: #d8f5ef;
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+  border: none;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.modal-close-btn:hover {
+  background: rgba(255, 255, 255, 0.35);
+  transform: rotate(90deg);
+}
+
+.modal-close-btn svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+.modal-body {
+  padding: 28px 32px;
+  font-size: 1.02rem;
+  line-height: 1.7;
+  color: #2c4a6b;
+}
+
+.modal-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px;
+  margin: 22px 0;
+  padding: 16px;
+  background: #f0f8f6;
+  border-radius: 18px;
+  border: 1px solid #ccece4;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #557b9e;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-value {
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: #1b4573;
+  margin-top: 3px;
+}
+
+.modal-quote {
+  border-left: 4px solid var(--lake-cyan);
+  padding: 12px 18px;
+  margin: 22px 0 10px;
+  background: #f5fafd;
+  border-radius: 0 14px 14px 0;
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 1.05rem;
+  color: #1e4570;
+}
+
+/* Audio Player dentro del modal para "Escucha el territorio" */
+.audio-player-box {
+  background: linear-gradient(135deg, #1b4573, #2b6099);
+  color: var(--white);
+  padding: 18px 24px;
+  border-radius: 20px;
+  margin: 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  box-shadow: 0 8px 24px rgba(27, 69, 115, 0.2);
+}
+
+.audio-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.audio-track-title {
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.audio-track-desc {
+  font-size: 0.85rem;
+  opacity: 0.85;
+}
+
+.audio-play-toggle {
+  background: var(--lake-cyan);
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s;
+}
+
+.audio-play-toggle:hover {
+  background: #2ea392;
+  transform: scale(1.05);
+}
+
+/* Notificación flotante / Toast */
+.fish-toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(80px);
+  background: rgba(22, 52, 84, 0.92);
+  backdrop-filter: blur(12px);
+  color: #ffffff;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 600;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s;
+  opacity: 0;
+  pointer-events: none;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.fish-toast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+/* Pie de página sutil */
+.footer-note {
+  text-align: center;
+  padding: 20px;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  pointer-events: auto;
+}
+
+/* Modo pantalla completa de acuario 3D (oculta los hexágonos) */
+body.aquarium-mode .infographic-canvas,
+body.aquarium-mode .header-region {
+  opacity: 0.08;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+body.aquarium-mode #connections-svg {
+  opacity: 0.04;
+}
+
+/* Responsive para pantallas medianas y móviles */
+@media (max-width: 1100px) {
+  #app-viewport {
+    overflow-x: auto;
+    overflow-y: auto;
+  }
+  .infographic-canvas {
+    min-width: 1050px;
+    margin: 10px auto 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hud-controls {
+    top: 10px;
+    right: 10px;
+    gap: 6px;
+  }
+  .hud-btn {
+    padding: 8px 10px;
+    font-size: 0.75rem;
+  }
+  .hud-btn span {
+    display: none;
+  }
+  .hud-btn svg {
+    margin: 0;
+  }
+  .title-banner {
+    padding: 12px 24px 16px;
+  }
+  .title-banner h1 {
+    font-size: 1.8rem;
+    letter-spacing: 2px;
+  }
+  .title-banner .subtitle {
+    font-size: 1.35rem;
+  }
+  .header-side-note {
+    position: static;
+    margin-top: 10px;
+    text-align: center;
+  }
+  .header-region {
+    flex-direction: column;
+    padding-top: 55px;
+  }
+  .ribbon-tab {
+    display: none;
+  }
+  .modal-card {
+    padding: 0;
+  }
+  .modal-title {
+    font-size: 1.4rem;
+  }
+}
