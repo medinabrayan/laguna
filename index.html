@@ -61,11 +61,12 @@
       </div>
     </section>
 
-    <!-- Tablero de Infografía con Nodos Hexagonales -->
-    <main class="infographic-canvas" id="infographic-board">
-      
-      <!-- Lienzo SVG para las líneas de conexión dinámicas entre hexágonos -->
-      <svg id="connections-svg"></svg>
+    <!-- Contenedor scroll/zoom responsive -->
+    <div class="infographic-scroll-wrapper" id="infographic-wrapper">
+      <main class="infographic-canvas" id="infographic-board">
+        
+        <!-- Lienzo SVG para las líneas de conexión dinámicas entre hexágonos -->
+        <svg id="connections-svg"></svg>
 
       <!-- Template reutilizable de hexágono SVG definido dentro de cada nodo -->
 
@@ -246,7 +247,13 @@
         <span class="hex-label">Una tradición<br>que permanece</span>
       </div>
 
-    </main>
+      </main>
+    </div>
+
+    <!-- Indicador de navegación táctil para pantallas móviles -->
+    <div class="mobile-scroll-hint" id="mobile-hint">
+      <span>👈 Desliza para explorar la laguna • Toca para abrir detalles 👉</span>
+    </div>
 
     <!-- Notificación / Toast de estado interactivo -->
     <div id="fish-toast" class="fish-toast">

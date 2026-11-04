@@ -163,6 +163,7 @@ class App {
     const nodes = document.querySelectorAll(".hex-node");
     nodes.forEach((node) => {
       node.addEventListener("mouseenter", () => {
+        if (this.isAquariumMode) return;
         if (window.soundEngine) {
           window.soundEngine.playWaterDrop(0.08, 700 + Math.random() * 200);
         }
@@ -170,10 +171,12 @@ class App {
       });
 
       node.addEventListener("mouseleave", () => {
+        if (this.isAquariumMode) return;
         this.highlightConnectedLines(node.id, false);
       });
 
       node.addEventListener("click", (e) => {
+        if (this.isAquariumMode) return;
         e.stopPropagation();
         const id = node.getAttribute("data-id");
         this.openModal(id);
@@ -265,10 +268,11 @@ class App {
     if (!this.svgContainer || !this.board) return;
     this.svgContainer.innerHTML = "";
 
-    const boardRect = this.board.getBoundingClientRect();
-    this.svgContainer.setAttribute("viewBox", `0 0 ${boardRect.width} ${boardRect.height}`);
-    this.svgContainer.setAttribute("width", `${boardRect.width}`);
-    this.svgContainer.setAttribute("height", `${boardRect.height}`);
+    const boardW = this.board.offsetWidth || 1300;
+    const boardH = this.board.offsetHeight || 1050;
+    this.svgContainer.setAttribute("viewBox", `0 0 ${boardW} ${boardH}`);
+    this.svgContainer.setAttribute("width", `${boardW}`);
+    this.svgContainer.setAttribute("height", `${boardH}`);
 
     const CONNECTIONS = [
       ["node-inicio", "node-donde-estamos"],
@@ -304,14 +308,10 @@ class App {
 
       if (!elFrom || !elTo) return;
 
-      const r1 = elFrom.getBoundingClientRect();
-      const r2 = elTo.getBoundingClientRect();
-
-      // Coordenadas del centro de cada hexágono relativas al tablero
-      const x1 = r1.left + r1.width / 2 - boardRect.left;
-      const y1 = r1.top + r1.height / 2 - boardRect.top;
-      const x2 = r2.left + r2.width / 2 - boardRect.left;
-      const y2 = r2.top + r2.height / 2 - boardRect.top;
+      const x1 = elFrom.offsetLeft + elFrom.offsetWidth / 2;
+      const y1 = elFrom.offsetTop + elFrom.offsetHeight / 2;
+      const x2 = elTo.offsetLeft + elTo.offsetWidth / 2;
+      const y2 = elTo.offsetTop + elTo.offsetHeight / 2;
 
       // Crear línea con curvatura natural
       const path = document.createElementNS("http://www.w3.org/2000/svg", "path");

@@ -29,10 +29,16 @@ html, body {
   width: 100%;
   height: 100%;
   overflow-x: hidden;
-  background-color: #dcf2ee;
+  background: radial-gradient(circle at 50% 30%, #165b6f 0%, #0d3b4b 45%, #051d27 100%);
   font-family: 'Montserrat', sans-serif;
   color: var(--text-dark);
   user-select: none;
+  cursor: none !important; /* El cursor es sustituido por burbujas interactivas */
+}
+
+/* Permitir que todos los elementos interactivos hereden cursor none */
+a, button, .hex-node, .hud-btn, .modal-close-btn, input {
+  cursor: none !important;
 }
 
 /* Contenedor del lienzo 3D Three.js */
@@ -68,33 +74,35 @@ html, body {
 }
 
 .hud-btn {
-  background: var(--glass-bg);
-  backdrop-filter: blur(10px);
-  border: 1.5px solid var(--glass-border);
+  background: rgba(14, 46, 68, 0.78);
+  backdrop-filter: blur(14px);
+  border: 1.5px solid rgba(74, 224, 200, 0.35);
   border-radius: 30px;
   padding: 8px 16px;
   font-size: 0.85rem;
   font-weight: 600;
-  color: var(--primary-blue-dark);
+  color: #defbf6;
   display: flex;
   align-items: center;
   gap: 8px;
-  cursor: pointer;
-  box-shadow: 0 4px 15px rgba(27, 69, 115, 0.1);
+  cursor: none !important;
+  box-shadow: 0 6px 20px rgba(5, 20, 35, 0.25);
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .hud-btn:hover {
-  background: var(--white);
+  background: rgba(22, 68, 100, 0.92);
   transform: translateY(-2px);
-  border-color: var(--primary-blue);
-  box-shadow: 0 6px 20px rgba(39, 93, 151, 0.22);
+  border-color: #38e8cb;
+  color: #ffffff;
+  box-shadow: 0 0 20px rgba(56, 232, 203, 0.4), 0 8px 25px rgba(5, 20, 35, 0.35);
 }
 
 .hud-btn.active {
-  background: var(--primary-blue);
+  background: linear-gradient(135deg, #1d69a6 0%, #2ba597 100%);
   color: var(--white);
-  border-color: var(--primary-blue-dark);
+  border-color: #5cf7e0;
+  box-shadow: 0 0 25px rgba(92, 247, 224, 0.5);
 }
 
 .hud-btn svg {
@@ -144,17 +152,19 @@ html, body {
 
 /* Contenedor tipo píldora central para "GUAPUCHAS" */
 .title-banner {
-  background: linear-gradient(135deg, #275a90 0%, #356fa8 100%);
+  background: linear-gradient(135deg, rgba(20, 64, 105, 0.88) 0%, rgba(27, 85, 138, 0.92) 100%);
+  backdrop-filter: blur(16px);
   padding: 18px 65px 22px;
   border-radius: 46px;
   text-align: center;
-  box-shadow: 0 14px 34px rgba(27, 69, 115, 0.25), inset 0 1px 2px rgba(255, 255, 255, 0.35);
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  transition: transform 0.3s ease;
+  box-shadow: 0 16px 45px rgba(5, 25, 45, 0.45), 0 0 35px rgba(56, 232, 203, 0.25);
+  border: 1.8px solid rgba(86, 232, 212, 0.35);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .title-banner:hover {
   transform: scale(1.02);
+  box-shadow: 0 20px 50px rgba(5, 25, 45, 0.5), 0 0 45px rgba(56, 232, 203, 0.4);
 }
 
 .title-banner h1 {
@@ -163,7 +173,7 @@ html, body {
   font-weight: 800;
   letter-spacing: 4px;
   color: #ffffff;
-  text-shadow: 0 2px 8px rgba(10, 30, 50, 0.3);
+  text-shadow: 0 2px 10px rgba(5, 20, 35, 0.5), 0 0 20px rgba(74, 224, 200, 0.3);
   line-height: 1.1;
   text-transform: uppercase;
 }
@@ -172,76 +182,95 @@ html, body {
   font-family: 'Caveat', cursive;
   font-size: 1.95rem;
   font-weight: 700;
-  color: #f7fffd;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  color: #defbf6;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.3), 0 0 12px rgba(74, 224, 200, 0.4);
   margin-top: 2px;
   letter-spacing: 1px;
 }
 
-/* Nota de cabecera a la derecha: "Un viaje por Fúquene" */
+/* Nota de cabecera a la derecha: "Un viaje por Fúquene" (bajado armónicamente) */
 .header-side-note {
   position: absolute;
-  top: 42px;
-  right: 170px;
+  top: 88px;
+  right: 140px;
   text-align: right;
   pointer-events: auto;
+  z-index: 30;
 }
 
 .header-side-note a {
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
   font-size: 1.05rem;
-  color: #1b4573;
+  color: #defbf6;
   text-decoration: underline;
   text-decoration-thickness: 1.8px;
   text-underline-offset: 4px;
   letter-spacing: 0.5px;
-  transition: color 0.2s;
-  cursor: pointer;
+  transition: color 0.2s, text-shadow 0.2s;
+  cursor: none !important;
 }
 
 .header-side-note a:hover {
-  color: var(--lake-cyan);
+  color: #38e8cb;
+  text-shadow: 0 0 12px rgba(56, 232, 203, 0.8);
 }
 
-/* Lienzo SVG para dibujar las líneas de conexión entre hexágonos */
+/* Lienzo SVG para dibujar las líneas de conexión entre hexágonos (POR DEBAJO DE LOS HEXÁGONOS) */
 #connections-svg {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 10;
+  z-index: 2; /* Nivel inferior para que nunca cruce por encima del texto */
   pointer-events: none;
 }
 
 .flow-line {
-  stroke: #2b6099;
-  stroke-width: 2.2;
+  stroke: #2a7dbf;
+  stroke-width: 2.4;
   stroke-linecap: round;
+  stroke-dasharray: 8 5;
   fill: none;
-  opacity: 0.75;
-  transition: stroke 0.3s, stroke-width 0.3s;
+  opacity: 0.85;
+  animation: flowDash 22s linear infinite;
+  transition: stroke 0.3s, stroke-width 0.3s, filter 0.3s;
+}
+
+@keyframes flowDash {
+  to { stroke-dashoffset: -130; }
 }
 
 .flow-line.pulse {
-  stroke: #39b7a4;
-  stroke-width: 3.2;
-  filter: drop-shadow(0 0 6px rgba(57, 183, 164, 0.8));
+  stroke: #38e8cb;
+  stroke-width: 3.6;
+  stroke-dasharray: none;
+  filter: drop-shadow(0 0 10px rgba(56, 232, 203, 0.95));
+}
+
+/* Envoltorio responsive con scroll táctil suave y centrado */
+.infographic-scroll-wrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  z-index: 20;
 }
 
 /* Tablero de Nodos Hexagonales */
 .infographic-canvas {
   position: relative;
   z-index: 20;
-  width: 100%;
+  width: 1300px;
   max-width: 1300px;
   margin: 10px auto 40px;
   min-height: 1050px;
   pointer-events: none; /* Permite interactuar con el agua y los peces entre los hexágonos */
 }
 
-/* Elemento Hexagonal Individual */
+/* Elemento Hexagonal Individual (POR ENCIMA DE LAS LÍNEAS SVG) */
 .hex-node {
   position: absolute;
   width: 135px;
@@ -249,8 +278,9 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
+  cursor: none !important;
   pointer-events: auto; /* Los hexágonos capturan clics */
+  z-index: 10; /* Siempre por encima del SVG (z-index: 2) para proteger el texto */
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), filter 0.25s;
   user-select: none;
 }
@@ -267,7 +297,7 @@ html, body {
   z-index: 60;
 }
 
-/* SVG que dibuja el hexágono con su borde y fondo */
+/* SVG que dibuja el hexágono con su borde y fondo sólido */
 .hex-shape {
   position: absolute;
   top: 0;
@@ -277,40 +307,44 @@ html, body {
   filter: drop-shadow(0 6px 14px rgba(27, 69, 115, 0.12));
 }
 
-/* Hexágono Blanco con borde azul (estilo de nodos secundarios) */
+/* Hexágono Blanco con borde azul (Fondo 100% sólido para no dejar pasar las líneas debajo del texto) */
 .hex-node.style-white polygon {
-  fill: #ffffff;
-  stroke: #2a5f97;
-  stroke-width: 2.5;
+  fill: #ffffff; /* Sólido puro opaco */
+  stroke: #246a9f;
+  stroke-width: 2.4;
   stroke-linejoin: round;
-  transition: all 0.25s;
+  filter: drop-shadow(0 6px 16px rgba(8, 28, 48, 0.25));
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .hex-node.style-white:hover polygon {
-  fill: #f4faf8;
-  stroke: #1a4573;
+  fill: #f2fcf9;
+  stroke: #38e8cb;
   stroke-width: 3.2;
+  filter: drop-shadow(0 0 18px rgba(56, 232, 203, 0.85)) drop-shadow(0 10px 24px rgba(8, 28, 48, 0.4));
 }
 
-/* Hexágono Azul Relleno (estilo de categorías principales) */
+/* Hexágono Azul Relleno (Fondo 100% sólido opaco) */
 .hex-node.style-blue polygon {
-  fill: #2a5f97;
-  stroke: #1f4e80;
+  fill: #1f5891; /* Sólido puro opaco */
+  stroke: #45dfcc;
   stroke-width: 2.5;
   stroke-linejoin: round;
-  transition: all 0.25s;
+  filter: drop-shadow(0 8px 20px rgba(10, 38, 68, 0.45));
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .hex-node.style-blue:hover polygon {
-  fill: #3471b0;
+  fill: #266da9;
   stroke: #ffffff;
-  stroke-width: 2.5;
+  stroke-width: 3.0;
+  filter: drop-shadow(0 0 22px rgba(69, 223, 204, 0.95)) drop-shadow(0 12px 28px rgba(10, 38, 68, 0.55));
 }
 
-/* Texto dentro del hexágono */
+/* Texto dentro del hexágono (Capa superior nítida) */
 .hex-label {
   position: relative;
-  z-index: 2;
+  z-index: 15; /* Nivel superior para total legibilidad */
   text-align: center;
   padding: 0 14px;
   font-family: 'Montserrat', sans-serif;
@@ -589,72 +623,178 @@ html, body {
   pointer-events: auto;
 }
 
-/* Modo pantalla completa de acuario 3D (oculta los hexágonos) */
-body.aquarium-mode .infographic-canvas,
+/* Modo pantalla completa de acuario 3D (DESACTIVA Y OCULTA POR COMPLETO LOS HEXÁGONOS) */
+body.aquarium-mode .infographic-scroll-wrapper,
+body.aquarium-mode .infographic-canvas {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+body.aquarium-mode .hex-node {
+  pointer-events: none !important;
+  cursor: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
+body.aquarium-mode #connections-svg {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+body.aquarium-mode .mobile-scroll-hint {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
 body.aquarium-mode .header-region {
-  opacity: 0.08;
+  opacity: 0.15;
   pointer-events: none;
   transition: opacity 0.4s ease;
 }
 
-body.aquarium-mode #connections-svg {
-  opacity: 0.04;
+/* Indicador de desplazamiento en móviles */
+.mobile-scroll-hint {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  margin: -10px auto 25px;
+  z-index: 25;
+  pointer-events: auto;
 }
 
-/* Responsive para pantallas medianas y móviles */
-@media (max-width: 1100px) {
-  #app-viewport {
-    overflow-x: auto;
-    overflow-y: auto;
+.mobile-scroll-hint span {
+  background: rgba(10, 36, 56, 0.88);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(56, 232, 203, 0.45);
+  color: #c4f7ee;
+  font-size: 0.76rem;
+  font-weight: 600;
+  padding: 6px 16px;
+  border-radius: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  animation: pulseHint 2.4s infinite ease-in-out;
+}
+
+@keyframes pulseHint {
+  0%, 100% { opacity: 0.85; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.03); }
+}
+
+/* Responsive para pantallas medianas, laptops y tablets (auto-escalado proporcional) */
+@media (max-width: 1340px) and (min-width: 860px) {
+  .infographic-scroll-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    overflow: visible;
   }
   .infographic-canvas {
-    min-width: 1050px;
-    margin: 10px auto 40px;
+    transform-origin: top center;
+    transform: scale(calc(min(1, (100vw - 40px) / 1300)));
+    margin-bottom: calc(-1050px * (1 - min(1, (100vw - 40px) / 1300)) + 20px);
+  }
+}
+
+/* Responsive para tablets pequeñas y móviles (scroll táctil suave) */
+@media (max-width: 859px) {
+  #app-viewport {
+    overflow-x: hidden;
+  }
+
+  .infographic-scroll-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    padding: 0 10px 30px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(56, 232, 203, 0.4) transparent;
+  }
+
+  .infographic-scroll-wrapper::-webkit-scrollbar {
+    height: 6px;
+  }
+  .infographic-scroll-wrapper::-webkit-scrollbar-thumb {
+    background: rgba(56, 232, 203, 0.4);
+    border-radius: 4px;
+  }
+
+  .infographic-canvas {
+    min-width: 1150px;
+    width: 1150px;
+    margin: 10px auto 20px;
+    transform: none;
+  }
+
+  .mobile-scroll-hint {
+    display: flex;
   }
 }
 
 @media (max-width: 768px) {
   .hud-controls {
-    top: 10px;
-    right: 10px;
+    top: 8px;
+    right: 8px;
+    left: 8px;
+    justify-content: center;
     gap: 6px;
+    flex-wrap: wrap;
   }
   .hud-btn {
-    padding: 8px 10px;
-    font-size: 0.75rem;
+    padding: 7px 11px;
+    font-size: 0.74rem;
   }
   .hud-btn span {
-    display: none;
+    display: inline-block;
   }
   .hud-btn svg {
-    margin: 0;
+    width: 15px;
+    height: 15px;
+  }
+  .header-region {
+    flex-direction: column;
+    padding-top: 68px;
+    padding-bottom: 5px;
   }
   .title-banner {
-    padding: 12px 24px 16px;
+    padding: 12px 20px 14px;
+    max-width: 92vw;
   }
   .title-banner h1 {
-    font-size: 1.8rem;
+    font-size: 1.65rem;
     letter-spacing: 2px;
   }
   .title-banner .subtitle {
-    font-size: 1.35rem;
+    font-size: 1.25rem;
   }
   .header-side-note {
     position: static;
     margin-top: 10px;
     text-align: center;
   }
-  .header-region {
-    flex-direction: column;
-    padding-top: 55px;
-  }
   .ribbon-tab {
     display: none;
   }
   .modal-card {
-    padding: 0;
+    width: 95vw;
+    max-height: 88vh;
+    border-radius: 20px;
+  }
+  .modal-header {
+    padding: 20px 20px 16px;
   }
   .modal-title {
-    font-size: 1.4rem;
+    font-size: 1.35rem;
+  }
+  .modal-body {
+    padding: 18px 20px;
+    font-size: 0.94rem;
+  }
+  .modal-stats {
+    grid-template-columns: 1fr;
   }
 }
