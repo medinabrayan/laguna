@@ -1,4 +1,5 @@
-// data.js - Contenido cultural, biológico y gastronómico de la Laguna de Fúquene y la Guapucha
+// data.js - Base de datos biocultural, gastronómica, comunitaria y cartográfica de Guapuchas: Latidos de Fúquene
+
 const NODES_DATA = {
   "inicio": {
     id: "inicio",
@@ -8,8 +9,8 @@ const NODES_DATA = {
     badge: "Punto de Partida",
     image: "fúquene",
     color: "#27578c",
-    text: `Bienvenido a <strong>Guapuchas: Un sabor que nace debajo del agua</strong>, una expedición interactiva y sensorial a través de la memoria biocultural de la <strong>Laguna de Fúquene</strong>, ubicada en el corazón del altiplano cundiboyacense en Colombia.<br><br>
-    Este recorrido rescata la historia de la <strong>Guapucha (<em>Grundulus bogotensis</em>)</strong>, un pez emblemático y endémico que ha alimentado a comunidades indígenas muiscas, pescadores artesanales y familias campesinas durante siglos. Explora cada nodo hexagonal para descubrir su biología, los saberes culinarios ancestrales, los testimonios de los habitantes y los cantos del agua.`,
+    text: `Bienvenido a <strong>Guapuchas: Latidos de Fúquene</strong>, una expedición interactiva y sensorial a través de la memoria biocultural de la <strong>Laguna de Fúquene</strong>, ubicada en el corazón del altiplano cundiboyacense en Colombia.<br><br>
+    Este recorrido rescata la historia de la <strong>Guapucha (<em>Grundulus bogotensis</em>)</strong>, un pez emblemático y endémico que ha alimentado a comunidades indígenas muiscas, pescadores artesanales y familias campesinas durante siglos. Explora cada estación para descubrir su biología, los saberes culinarios ancestrales, los testimonios de los habitantes y los cantos del agua.`,
     stats: [
       { label: "Ecosistema", value: "Laguna Altoandina (2.540 msnm)" },
       { label: "Especie Clave", value: "Grundulus bogotensis" },
@@ -70,309 +71,21 @@ const NODES_DATA = {
     quote: "«Fúquene fue el corazón hídrico de nuestros antepasados; hoy clama por seguir latiendo.»"
   },
 
-  "del-agua-al-plato": {
-    id: "del-agua-al-plato",
-    title: "Del agua al plato",
-    category: "Gastronomía",
-    subtitle: "El circuito biocultural de la pesca artesanal",
-    badge: "Circuito Vivo",
-    color: "#27578c",
-    text: `El viaje de la guapucha es un ciclo de respeto y reciprocidad: <strong>del agua a la canoa, de la canoa a la cocina, y de la paila a la mesa</strong>.<br><br>
-    Comienza a las 4:00 a.m. cuando los pescadores apartan la niebla en sus botes de madera. Tras la faena, las guapuchas se lavan con agua cristalina, se enharinan suavemente y se sumergen enteras en manteca o aceite bien caliente. Servidas sobre hojas de chusque con papa criolla y maíz tostado, representan la armonía entre el lago y la huerta andina.`,
-    stats: [
-      { label: "Hora de Pesca", value: "4:00 AM - 7:00 AM" },
-      { label: "Cocción Tradicional", value: "Fritura en paila de hierro" },
-      { label: "Maridaje Ancestral", value: "Maíz tostado y ají de pimentón" }
-    ],
-    quote: "«En cada bocado crujiente se siente la frescura de la laguna y el calor del fogón de leña.»"
-  },
-
   "escucha-el-territorio": {
     id: "escucha-el-territorio",
     title: "Escucha el territorio",
     category: "Paisaje Sonoro",
-    subtitle: "El murmullo de las olas, las aves y las memorias",
-    badge: "Experiencia Auditiva",
-    color: "#336ea8",
-    isAudioNode: true,
-    text: `Cierra los ojos y escucha la laguna. El paisaje sonoro de Fúquene está compuesto por capas sutiles: el chasquido rítmico del remo al quebrar el agua, el canto metálico de la <strong>Tingua bogotana</strong> entre los juncos, el silbido del viento frío bajando de los cerros de Guachetá y el chisporroteo de la leña en la cocina de la orilla.<br><br>
-    <em>Usa el botón de audio interactivo abajo para activar el paisaje sonoro procesado en tiempo real con Web Audio API.</em>`,
+    subtitle: "Voces, olas y cantos de aves andinas",
+    badge: "Paisaje Sonoro",
+    color: "#27578c",
+    text: `El territorio de Fúquene no solo se ve: <strong>se escucha con devoción</strong>. Al cerrar los ojos a la orilla del agua se revelan las texturas sonoras de la alta montaña: el chapoteo rítmico de los remos de madera de aliso, el crujido de los juncales cuando sopla el viento helado del páramo, y el canto de aves emblemáticas como la tingua bogotana y el cucarachero de pantano.<br><br>
+    Escuchar el territorio es reconocer la voz viva de quienes habitan el ecosistema y comprender que cada gota de agua guarda un relato compartido de resistencia campesina y comunitaria.`,
     stats: [
-      { label: "Ambiente", value: "Humedal Altoandino" },
-      { label: "Aves Típicas", value: "Tingua, Pato turrio, Garza" },
-      { label: "Elemento", value: "Viento andino y agua en movimiento" }
+      { label: "Aves Registradas", value: "+125 especies" },
+      { label: "Ambiente Sonoro", value: "Viento andino y oleaje dulce" },
+      { label: "Patrimonio", value: "Acústico de humedales" }
     ],
-    quote: "«El territorio no solo se ve ni se come; el territorio se escucha cuando uno aprende a guardar silencio.»"
-  },
-
-  "agua": {
-    id: "agua",
-    title: "Agua",
-    category: "Ecología",
-    subtitle: "El fluido vital y la memoria hídrica del lago",
-    badge: "Elemento Sagrado",
-    color: "#3b7ebf",
-    text: `El agua de Fúquene es el soporte vital de innumerables vidas: fitoplancton, macrófitas como el junco y la totora, caracoles de agua dulce, anfibios y peces nativos como el capitán de la sabana y la guapucha.<br><br>
-    A lo largo del siglo XX, la laguna sufrió graves presiones por drenajes agropecuarios y proliferación de buchón. Sin embargo, hoy en día se adelantan <strong>proyectos de dragado ecológico, descontaminación y siembra de vegetación nativa</strong> para restaurar el espejo de agua y devolverle a la guapucha su hogar ancestral.`,
-    stats: [
-      { label: "Tipo de Agua", value: "Léntica dulceacuícola" },
-      { label: "Profundidad Media", value: "1.5 a 4.5 metros" },
-      { label: "Acción Vital", value: "Restauración hidrológica" }
-    ],
-    quote: "«Cuidar el agua de Fúquene es garantizar que nuestros hijos conozcan la guapucha nadando y no en una foto.»"
-  },
-
-  "territorio-comunidad": {
-    id: "territorio-comunidad",
-    title: "Territorio y comunidad",
-    category: "Sociedad",
-    subtitle: "Los guardianes de la cuenca de Fúquene",
-    badge: "Identidad",
-    color: "#3b7ebf",
-    text: `Los habitantes de los alrededores de la laguna han forjado una identidad íntimamente ligada al lago: artesanos que tejen esteras de junco, pescadores de toda la vida, y agricultores de papa y maíz.<br><br>
-    La comunidad no ve la laguna como un recurso económico aislado, sino como un <strong>vecino vivo</strong> con el que se convive. Festividades locales, mingas comunitarias de limpieza y escuelas campesinas promueven hoy el reconocimiento de la guapucha como símbolo de orgullo territorial.`,
-    stats: [
-      { label: "Municipios", value: "Fúquene, Ubaté, Guachetá, Simijaca" },
-      { label: "Oficios Tradicionales", value: "Pesca, tejeduría en junco, cocina" },
-      { label: "Valores", value: "Reciprocidad y arraigo" }
-    ],
-    quote: "«Somos gente del agua; si la laguna se seca, una parte de nuestra alma campesina se apaga con ella.»"
-  },
-
-  "cocina": {
-    id: "cocina",
-    title: "Cocina Tradicional",
-    category: "Gastronomía",
-    subtitle: "El calor del fogón y las técnicas ancestrales",
-    badge: "Fogón Andino",
-    color: "#3b7ebf",
-    text: `La cocina campesina de Fúquene es sobria, precisa y basada en el respeto por los ingredientes puros. La preparación de la guapucha requiere un fogón bien alimentado con maderas aromáticas como el aliso o el eucalipto.<br><br>
-    A diferencia de pescados grandes que se filetean, la guapucha <strong>se cocina entera</strong>. Su espinazo tierno se vuelve crocante con la fritura, lo que permite comerla completa, aprovechando todo su aporte de fósforo, calcio y omega natural sin generar desperdicio.`,
-    stats: [
-      { label: "Combustible", value: "Leña de aliso y carbón vegetal" },
-      { label: "Técnica Principal", value: "Fritura profunda en paila" },
-      { label: "Acompañamiento", value: "Arepa de laja y papa salada" }
-    ],
-    quote: "«El secreto está en que el aceite chille alegremente en la paila; si está tibio, la guapucha se entristece.»"
-  },
-
-  "guapucha": {
-    id: "guapucha",
-    title: "La Guapucha en la mesa",
-    category: "Ingrediente",
-    subtitle: "Delicadeza, nutrición y sabor único",
-    badge: "Patrimonio Culinario",
-    color: "#3b7ebf",
-    text: `En el paladar, la guapucha frita sorprende por su textura: un exterior crujiente y dorado que da paso a una carne suave, dulce y delicadamente yodada, con el sabor inconfundible de las aguas dulces altoandinas.<br><br>
-    Históricamente, era la merienda preferida de los campesinos durante las jornadas de siembra y cosecha en el altiplano. Es un superalimento andino: alta concentración de proteínas de alto valor biológico y minerales esenciales.`,
-    stats: [
-      { label: "Perfil de Sabor", value: "Delicado, dulce, con notas a hierba de río" },
-      { label: "Textura", value: "Crocante al exterior, tierna adentro" },
-      { label: "Aporte Nutricional", value: "Rica en calcio, fósforo y proteína" }
-    ],
-    quote: "«Un puñado de guapuchas con maíz tostado alimenta el cuerpo y calienta la memoria.»"
-  },
-
-  "maiz": {
-    id: "maiz",
-    title: "Maíz",
-    category: "Agricultura Ancestral",
-    subtitle: "El compañero eterno de la guapucha",
-    badge: "Semilla Sagrada",
-    color: "#3b7ebf",
-    text: `No hay guapucha sin maíz. El maíz amarillo y porva cultivado en las laderas de Fúquene es el complemento indispensable en todas las mesas de la región.<br><br>
-    Se prepara tostado al tiesto de barro con sal y manteca de cerdo, o en forma de <strong>arepa de maíz pelao</strong> molido a mano. La combinación de pescado de agua dulce y maíz tostado es una herencia directa de la dieta prehispánica muisca que ha sobrevivido quinientos años intacta.`,
-    stats: [
-      { label: "Variedades Locales", value: "Maíz Porva, Amarillo y Choclo" },
-      { label: "Preparación", value: "Tostado al tiesto / Arepa campesina" },
-      { label: "Herencia", value: "Prehispánica Muisca" }
-    ],
-    quote: "«El maíz es el oro de la tierra, la guapucha es la plata del agua. Juntos son el banquete de Fúquene.»"
-  },
-
-  "que-es": {
-    id: "que-es",
-    title: "¿Qué es la Guapucha?",
-    category: "Morfología",
-    subtitle: "Rasgos distintivos y adaptación biológica",
-    badge: "Ficha Biológica",
-    color: "#4789c8",
-    text: `La <em>Grundulus bogotensis</em> es un pez actinopterigio de tamaño reducido. Carece de aleta adiposa (a diferencia de otros carácidos tropicales), lo que representa una notable adaptación evolutiva a las aguas frías de altura.<br><br>
-    Posee ojos grandes y expresivos adaptados a la baja visibilidad entre juncales y fondos limosos. Su boca pequeña orientada ligeramente hacia arriba le permite alimentarse eficazmente de microcrustáceos (daphnias, copépodos) y larvas acuáticas de insectos, controlando naturalmente las poblaciones del humedal.`,
-    stats: [
-      { label: "Clase", value: "Actinopterygii" },
-      { label: "Orden", value: "Characiformes" },
-      { label: "Dieta", value: "Zooplancton e invertebrados acuáticos" },
-      { label: "Respiración", value: "Branquial adaptada a bajo O₂" }
-    ],
-    quote: "«Observarla nadar entre los juncos es presenciar millones de años de adaptación andina.»"
-  },
-
-  "importancia": {
-    id: "importancia",
-    title: "Importancia Ecológica",
-    category: "Conservación",
-    subtitle: "El termómetro biológico del altiplano",
-    badge: "Bioindicador",
-    color: "#4789c8",
-    text: `La presencia de la guapucha es un <strong>bioindicador de la salud ecológica</strong> de los humedales andinos. Al ser muy sensible a la contaminación química por pesticidas y aguas residuales no tratadas, su abundancia o escasez avisa de inmediato el estado del ecosistema.<br><br>
-    Además, es una presa fundamental para aves migratorias boreales que llegan a Fúquene a descansar, así como para garzas, tinguas y nutrias de río. Su desaparición provocaría un colapso en la cadena trófica del humedal.`,
-    stats: [
-      { label: "Rol Trófico", value: "Consumidor secundario / Presa clave" },
-      { label: "Sensibilidad", value: "Alta a contaminantes e hipoxia" },
-      { label: "Impacto", value: "Sostiene poblaciones de aves acuáticas" }
-    ],
-    quote: "«Si la guapucha prospera, la laguna respira; si la guapucha se apaga, el humedal enferma.»"
-  },
-
-  "historia": {
-    id: "historia",
-    title: "Historia y Memoria",
-    category: "Historia",
-    subtitle: "De santuario muisca a símbolo de resistencia",
-    badge: "Crónica Histórica",
-    color: "#4789c8",
-    text: `Durante el periodo prehispánico, la confederación Muisca cuidaba las lagunas como moradas sagradas de sus deidades. Las crónicas de Indias del siglo XVI ya mencionaban pequeños peces plateados que los naturales pescaban con cestas de mimbre y secaban al sol para comerciar en los mercados de Chía y Bacatá.<br><br>
-    En el siglo XX, planes equivocados intentaron secar Fúquene para convertirla en potreros ganaderos. Gracias a la movilización de ambientalistas y campesinos, la laguna sobrevivió, y con ella la guapucha, convertida hoy en bandera de la defensa del agua.`,
-    stats: [
-      { label: "Periodo Muisca", value: "Pesca ritual y sustento diario" },
-      { label: "Siglo XX", value: "Defensa contra la desecación artificial" },
-      { label: "Hoy", value: "Restauración ecológica y patrimonial" }
-    ],
-    quote: "«En las leyendas muiscas, los peces eran pensamientos que el agua convertía en plata viva.»"
-  },
-
-  "tradicion": {
-    id: "tradicion",
-    title: "Tradición Pesquera",
-    category: "Costumbres",
-    subtitle: "Ritos, artes de pesca y respeto por los ciclos",
-    badge: "Oficio Ancestral",
-    color: "#4789c8",
-    text: `La pesca de la guapucha no se realiza con métodos industriales depredadores. Se emplean artes manuales tradicionales: la <strong>atarraya de ojo menudo</strong> tejida a mano con nylon resistente y plomos de equilibrio, o las tradicionales nasas de junco colocadas estratégicamente al atardecer en los callejones de agua.<br><br>
-    Los pescadores veteranos respetan los periodos de desove en los meses de lluvias, retirando las redes de las zonas de orilla donde las hembras depositan los huevos entre las raíces sumergidas.`,
-    stats: [
-      { label: "Arte de Pesca", value: "Atarraya artesanal y nasa de junco" },
-      { label: "Canoa", value: "Embarcación de madera a remo" },
-      { label: "Ética de Pesca", value: "Veda empírica durante el desove" }
-    ],
-    quote: "«A la laguna se le pide permiso antes de soltar la red, y se le da gracias al recogerla.»"
-  },
-
-  "preparacion": {
-    id: "preparacion",
-    title: "Preparación Culinaria",
-    category: "Cocina",
-    subtitle: "El arte de lograr la crocancia perfecta",
-    badge: "Técnica",
-    color: "#4a8fd6",
-    text: `Para preparar la guapucha perfecta se siguen tres pasos sagrados:<br><br>
-    <strong>1. El lavado:</strong> Se enjuagan suavemente varias veces en agua fría con un toque de salmuera para limpiar impurezas sin maltratar la carne.<br>
-    <strong>2. El adobo:</strong> Se frotan con sal de gema molida, ajo majado y un poco de cebolla junca picada finísima. Se dejan reposar unos 15 minutos para que absorban los aromas.<br>
-    <strong>3. El enharinado y fritura:</strong> Se espolvorean con una mezcla de harina de trigo y maíz tostado molido. Se sumergen en aceite abundante y muy caliente (180°C) durante 3 a 4 minutos hasta alcanzar un dorado brillante y sonoro.`,
-    stats: [
-      { label: "Tiempo de Cocción", value: "3 a 4 minutos" },
-      { label: "Temperatura de Aceite", value: "180°C (punto humo medio)" },
-      { label: "Punto Final", value: "Crocancia total, sin grasa residual" }
-    ],
-    quote: "«Si la guapucha no cruje como hoja seca bajo el zapato, le faltó fuego o le sobró apuro.»"
-  },
-
-  "saberes": {
-    id: "saberes",
-    title: "Saberes Gastronómicos",
-    category: "Sabiduría Popular",
-    subtitle: "Secretos de las matronas de la laguna",
-    badge: "Sabiduría",
-    color: "#4a8fd6",
-    text: `Las sabedoras de Fúquene guardan secretos transmitidos de madres a hijas:<br><br>
-    • <em>«Nunca tapes la paila mientras fríes»</em>, advierten, pues el vapor ablandaría la costra crujiente.<br>
-    • Si quieres un toque aromático, se añade una rama entera de poleo o cilantro de tierra al aceite al momento de calentar.<br>
-    • Para servir, nunca utilices platos plásticos fríos; el pescado se dispone sobre hojas frescas o platos de barro cocido de Ráquira para preservar el calor y la textura crujiente.`,
-    stats: [
-      { label: "Hierba Aromática", value: "Poleo campesino y cilantro cimarrón" },
-      { label: "Vajilla Ideal", value: "Barro cocido tradicional de Ráquira" },
-      { label: "Transmisión", value: "Linaje femenino culinario" }
-    ],
-    quote: "«Cocinar es un acto de amor y respeto por el pez que entregó su vida para nutrir a la familia.»"
-  },
-
-  "receta-tradicional": {
-    id: "receta-tradicional",
-    title: "Receta Tradicional",
-    category: "Recetario",
-    subtitle: "Guapuchas doradas con papas nativas y maíz",
-    badge: "Receta Magistral",
-    color: "#4a8fd6",
-    recipe: true,
-    text: `<strong>Ingredientes (para 4 personas):</strong><br>
-    • 500g de guapuchas frescas de Fúquene recién pescadas<br>
-    • 1 taza de harina de trigo cernida con 2 cucharadas de maíz tostado molido<br>
-    • 2 dientes de ajo machacados con sal de piedra<br>
-    • 1 tallo de cebolla junca fresca picada<br>
-    • Aceite o manteca vegetal abundante para freír<br>
-    • 1 libra de papa criolla pequeña cocida con cáscara<br>
-    • 2 tazas de maíz tostado al rescoldo<br>
-    • Limón mandarina y ají criollo al gusto<br><br>
-    <strong>Instrucciones:</strong> Sazona las guapuchas limpias con el ajo y la cebolla. Pásalas por la harina sacudiendo el exceso. Fríelas en tandas pequeñas para no enfriar el aceite hasta que tomen tono oro viejo. Acompaña de inmediato con las papas calientes partidas al medio y el maíz crocante. ¡Una fiesta para los sentidos!`,
-    stats: [
-      { label: "Dificultad", value: "Media (control de temperatura)" },
-      { label: "Porciones", value: "4 personas" },
-      { label: "Tiempo Total", value: "25 minutos" }
-    ],
-    quote: "«En cada bocado se celebra la unión de la tierra fértil de Boyacá y las aguas mágicas de Fúquene.»"
-  },
-
-  "cronica": {
-    id: "cronica",
-    title: "Crónica de la Laguna",
-    category: "Narrativa",
-    subtitle: "Una madrugada entre la niebla y las canoas",
-    badge: "Relato",
-    color: "#3b7ebf",
-    text: `A las cinco de la mañana, Fúquene no tiene orillas; el cielo y el agua son una sola sábana de bruma blanca. Don Hipólito empuja su canoa con una vara de aliso que toca el fondo fangoso. El agua fría gotea despacio.<br><br>
-    <em>«Mire allá, mijo»</em>, dice señalando un temblor en la superficie calma. Lanza la atarraya con un giro circular perfecto que se abre como una telaraña de plata sobre el agua. Al recoger la cuerda tensa, las guapuchas saltan atrapando los primeros rayos del sol andino. En ese instante fugaz, el tiempo se detiene y la memoria de América despierta.`,
-    stats: [
-      { label: "Lugar", value: "Isla del Sol, Laguna de Fúquene" },
-      { label: "Hora", value: "5:15 a.m., temperatura 7°C" },
-      { label: "Sensación", value: "Misterio, niebla y vida renaciente" }
-    ],
-    quote: "«La niebla no es para esconderse; es la cobija con la que la laguna cuida a sus peces mientras amanece.»"
-  },
-
-  "el-encuentro-con-la-guapucha": {
-    id: "el-encuentro-con-la-guapucha",
-    title: "El encuentro con la guapucha",
-    category: "Testimonio",
-    subtitle: "El asombro del primer bocado y la mirada cercana",
-    badge: "Experiencia",
-    color: "#3b7ebf",
-    text: `Para quien la prueba por primera vez, la guapucha rompe todos los prejuicios sobre comer pescado entero. No hay que temer a las espinas: son tan finas y dóciles que al freírse se tornan en una crujiente delicia que enriquece el bocado.<br><br>
-    Quienes visitan los piqueteaderos tradicionales de Ubaté o las orillas de Fúquene recuerdan para siempre la primera canastilla de guapuchas humeantes, con el olor tostado a leña y la sencillez de un plato que no necesita disfraces para cautivar.`,
-    stats: [
-      { label: "Experiencia", value: "Inmersión sensorial auténtica" },
-      { label: "Lugar de Degustación", value: "Piqueteaderos de Ubaté y Fúquene" },
-      { label: "Reacción Común", value: "Asombro por su crocancia total" }
-    ],
-    quote: "«Uno piensa que por ser chiquita no llena, pero la guapucha llena el corazón de historia.»"
-  },
-
-  "voces-del-territorio": {
-    id: "voces-del-territorio",
-    title: "Voces del territorio",
-    category: "Entrevistas",
-    subtitle: "Palabras vivas de los sabedores locales",
-    badge: "Testimonios",
-    color: "#3b7ebf",
-    text: `<em>«Aquí nací y aquí he criado a mis seis hijos con lo que la laguna nos regala. La guapucha nunca nos faltó en la mesa, ni en las épocas más duras. Cuando uno come guapucha, come laguna viva.»</em><br>
-    — Doña Rosaura González, cocinera tradicional de Guachetá.<br><br>
-    <em>«El secreto no es pescar mucho, sino pescar bien. No llevarse las crías chiquitas, no botar basura al agua, y saber esperar a que la luna crezca. Si uno respeta la laguna, ella te devuelve la bendición en peces.»</em><br>
-    — Don Efraín Pachón, pescador artesanal con 52 años en Fúquene.`,
-    stats: [
-      { label: "Comunidades", value: "Campesinos, pescadores y sabedoras" },
-      { label: "Legado", value: "Ética del cuidado y soberanía alimentaria" }
-    ],
-    quote: "«Nuestra voz es el agua hablando a través de la gente que nunca la abandonó.»"
+    quote: "«Quien aprende a oír el silencio de la laguna, comprende lo que el agua necesita pedirnos.»"
   },
 
   "de-la-pesca-a-la-mesa": {
@@ -424,5 +137,282 @@ const NODES_DATA = {
       { label: "Visión", value: "Laguna de Fúquene viva y próspera" }
     ],
     quote: "«La guapucha no es solo un pez del pasado; es el faro que nos guía hacia el cuidado del agua en el porvenir.»"
+  }
+};
+
+// SITE_DATA - Estructura completa de contenidos según especificación PDF "Guapuchas: Latidos de Fúquene"
+const SITE_DATA = {
+  header: {
+    title: "Guapuchas latidos de Fúquene",
+    subtitle: "Un recorrido interactivo por la memoria viva, la gastronomía y las voces de la Laguna de Fúquene.",
+    cta: "Comienza el viaje"
+  },
+
+  treasureMap: {
+    title: "Mapa ilustrado del tesoro",
+    description: "Este mapa interactivo te guiará por los 5 puntos cardinales de la memoria y la vida en la Laguna de Fúquene. Haz clic en cada parada para navegar directamente a sus secretos.",
+    points: [
+      {
+        id: "donde-estamos",
+        num: 1,
+        title: "Laguna de Fúquene",
+        subtitle: "¿Dónde estamos?",
+        icon: "🌊",
+        desc: "Geografía sagrada, historia milenaria y el santuario del agua."
+      },
+      {
+        id: "que-es-guapucha",
+        num: 2,
+        title: "Guapucha",
+        subtitle: "¿Qué es una guapucha?",
+        icon: "🐟",
+        desc: "Anatomía 3D, distribución biológica e impacto socioeconómico."
+      },
+      {
+        id: "escucha-el-territorio",
+        num: 3,
+        title: "Comunidad",
+        subtitle: "Escucha el territorio",
+        icon: "🎙️",
+        desc: "Voces vivas, relatos de pescadores y galería comunitaria."
+      },
+      {
+        id: "no-esta-en-un-libro",
+        num: 4,
+        title: "Luz Mery",
+        subtitle: "No está en un libro",
+        icon: "🍳",
+        desc: "Crónica de cocina ancestral, ingredientes y minijuego interactivo."
+      },
+      {
+        id: "contactos",
+        num: 5,
+        title: "Contáctanos",
+        subtitle: "Detrás de las Guapuchas",
+        icon: "💌",
+        desc: "Agradecimientos a la comunidad, equipo y buzón de ideas."
+      }
+    ]
+  },
+
+  dondeEstamos: {
+    title: "¿Dónde estamos?",
+    subtitle: "Recorrido guiado por Leo la Guapucha a través de la Laguna de Fúquene",
+    badge: "Geografía y Memoria",
+    intro: "Bienvenido a la Laguna de Fúquene, situada a 2.540 metros de altitud en los valles de Ubaté y Chiquinquirá. Acompáñanos en este recorrido con audio narrativo guiado por Leo la Guapucha.",
+    audioBackground: {
+      title: "Tema musical de fondo: Soy colombiano (versión instrumental)",
+      defaultNote: "Audio instrumental por defecto (sintetizado). Puedes reemplazar el archivo en data-audio-src con tu archivo de audio MP3 preferido.",
+      src: "audio/soy_colombiano.mp3"
+    },
+    dialogues: [
+      {
+        speaker: "Mujer IA",
+        role: "Narradora y Guía del Viaje",
+        avatar: "🎙️",
+        audioSrc: "audio/dialogo_mujer_ia.mp3",
+        text: "¡Hola! Bienvenidos a este viaje por la Laguna de Fúquene. Hoy no solo vamos a conocer un lugar mágico de Colombia, sino también a un pequeño habitante que guarda los secretos de estas aguas frías: ¡la guapucha! Y quién mejor para guiarnos que Leo, un pececito muy especial que ha vivido aquí toda su vida."
+      },
+      {
+        speaker: "Leo la Guapucha",
+        role: "Guardián de la Laguna",
+        avatar: "🐟",
+        audioSrc: "audio/dialogo_leo.mp3",
+        text: "¡Hola a todos! Yo soy Leo, una guapucha nadadora de Fúquene. Seguro me ves chiquito, pero mi familia lleva nadando en estas aguas desde antes de que existieran los caminos y las carreteras. Aquí entre los juncales y el agua fría aprendí a esquivar peligros, a buscar comida y a escuchar las historias que cuentan los pescadores en sus canoas cuando el sol apenas sale."
+      },
+      {
+        speaker: "Mujer IA",
+        role: "Narradora y Guía del Viaje",
+        avatar: "🎙️",
+        audioSrc: "audio/dialogo_mujer_2.mp3",
+        text: "¿Sabías que la laguna ha cambiado mucho con los años? Antes era tan grande que parecía un mar en medio de las montañas. Los abuelos cuentan que sus aguas eran cristalinas y que las guapuchas abundaban por millones. Hoy la laguna enfrenta retos ambientales por el buchón y la sedimentación, pero su corazón sigue latiendo con fuerza gracias al esfuerzo de las familias campesinas."
+      }
+    ]
+  },
+
+  queEsGuapucha: {
+    title: "¿Qué es una guapucha?",
+    subtitle: "El pez nativo de las aguas frías andinas (Grundulus bogotensis)",
+    badge: "Biología & Anatomía 3D",
+    intro: "La guapucha es un pez endémico del altiplano cundiboyacense que habita las aguas lentas y frías de la Laguna de Fúquene. Explora su modelo anatómico interactivo en 3D haciendo clic en sus partes para conocer su función adaptativa.",
+    anatomyParts: [
+      { id: "escamas", name: "Escamas y Coloración", desc: "Tonos oliváceos, plateados y dorados que le permiten mimetizarse entre el junco y los sedimentos de la laguna para protegerse de depredadores." },
+      { id: "ojos", name: "Ojos Adaptados", desc: "Grandes y orientados lateralmente para detectar presas diminutas y movimientos en aguas andinas con alta turbidez y luz dispersa." },
+      { id: "aleta-dorsal", name: "Aleta Dorsal", desc: "Ubicada en la parte superior posterior para proporcionar estabilidad hidrodinámica frente a las corrientes y el viento lacustre." },
+      { id: "vientre", name: "Vientre y Vejiga Natatoria", desc: "Zona plateada y aerodinámica con vejiga natatoria de alta precisión para flotar a profundidades medias entre 1 y 3 metros." },
+      { id: "aleta-caudal", name: "Aleta Caudal (Cola)", desc: "Bifurcada y ágil, le permite realizar impulsos rápidos e impredecibles para alimentarse de larvas de insectos y zooplancton." }
+    ],
+    charts: [
+      {
+        id: "distribucion",
+        title: "Distribución geográfica de la guapucha en la cuenca de Fúquene",
+        type: "bar",
+        data: [
+          { label: "Laguna principal", percentage: 65, color: "#1976d2" },
+          { label: "Humedales aledaños y totorales", percentage: 20, color: "#2e7d32" },
+          { label: "Ríos y caños tributarios", percentage: 15, color: "#f57c00" }
+        ],
+        summary: "El 65% de la población se concentra en las aguas abiertas de la laguna, mientras que los totorales periféricos actúan como zonas críticas de desove y crianza."
+      },
+      {
+        id: "impacto-socioeconomico",
+        title: "Impacto socioeconómico en las familias pescadoras",
+        type: "bar",
+        data: [
+          { label: "Alimento y seguridad nutricional propia", percentage: 55, color: "#00897b" },
+          { label: "Comercio local y venta en carretera", percentage: 30, color: "#e65100" },
+          { label: "Trueque tradicional comunitario", percentage: 15, color: "#6a1b9a" }
+        ],
+        summary: "Más de la mitad del impacto se centra en la seguridad alimentaria directa de las familias ribereñas, constituyendo una fuente proteica patrimonial insustituible."
+      }
+    ]
+  },
+
+  escuchaElTerritorio: {
+    title: "Escucha el territorio",
+    subtitle: "Voces y memorias vivas de la ribera de Fúquene",
+    badge: "Paisaje Sonoro & Testimonios",
+    intro: "Escucha los testimonios directos de los guardianes del agua: los pescadores tradicionales y las cocineras populares que mantienen encendida la llama de la memoria.",
+    audios: [
+      {
+        id: "audio-pescador",
+        title: "Testimonio de un pescador tradicional",
+        speaker: "Don Álvaro – Pescador artesanal de Fúquene",
+        role: "Pescador con más de 40 años en la laguna",
+        audioSrc: "audio/testimonio_pescador.mp3",
+        transcript: "«Desde las cuatro de la mañana salimos en la canoa de madera. La laguna nos recibe en silencio, solo se oye el viento y el canto de las tingüitas. Cuando tiramos la red, pedimos permiso al agua; la guapucha es un regalo sagrado que no se malgasta, nos ha criado a todos nosotros y a nuestros hijos.»"
+      },
+      {
+        id: "audio-luz-mery",
+        title: "Historia de Doña Luz Mery",
+        speaker: "Doña Luz Mery – Cocinera y sabedora tradicional",
+        role: "Custodia de la receta ancestral de guapuchas fritas",
+        audioSrc: "audio/historia_luz_mery.mp3",
+        transcript: "«Mi mamá me enseñó a preparar las guapuchas con leña de aliso cuando yo tenía apenas diez años. Me decía: 'Mijita, la guapucha se limpia con cariño, no se le quita la escama brava sino con sal marina, y se pone a dorar hasta que quede tostadita como una galleta'. Ese sabor no lo da ninguna sartén moderna, es el sabor de la tierra fría.»"
+      },
+      {
+        id: "audio-comunidad",
+        title: "Vivencias de la comunidad",
+        speaker: "Relato colectivo de las familias ribereñas",
+        role: "Memoria colectiva de Fúquene y Guachetá",
+        audioSrc: "audio/vivencias_comunidad.mp3",
+        transcript: "«La laguna no es solo agua: es nuestra casa, nuestro sustento y nuestra identidad. Antes, los domingos la gente bajaba a orillas de la laguna a compartir un plato de guapuchas fritas con papa criolla y ají casero. Hoy seguimos luchando por limpiarla y cuidarla, para que nuestros nietos también sepan a qué sabe Fúquene.»"
+      }
+    ],
+    photoWall: {
+      title: "Muro de fotos de la comunidad",
+      subtitle: "Fotografías, recuerdos y memorias vivas aportadas por quienes aman la laguna",
+      initialMemories: [
+        {
+          id: 1,
+          title: "Faena matutina al amanecer",
+          author: "Don Álvaro Pescador",
+          date: "Ayer a las 5:30 am",
+          text: "Canotaje tradicional en la zona de totorales mientras amanece sobre las montañas de Boyacá.",
+          tag: "Pesca Tradicional",
+          badgeColor: "#1976d2"
+        },
+        {
+          id: 2,
+          title: "Paila de hierro y leña viva",
+          author: "Doña Luz Mery",
+          date: "Hace 2 días",
+          text: "El fogón tradicional encendido listo para dorar las guapuchas con el toque crujiente perfecto.",
+          tag: "Gastronomía",
+          badgeColor: "#e65100"
+        },
+        {
+          id: 3,
+          title: "Cuidado de la laguna y siembra",
+          author: "Juventud de Simijaca",
+          date: "Semana pasada",
+          text: "Jornada comunitaria de limpieza de buchón y siembra de alisos protectores en la ribera norte.",
+          tag: "Conservación",
+          badgeColor: "#2e7d32"
+        }
+      ]
+    }
+  },
+
+  noEstaEnUnLibro: {
+    title: "No está en un libro",
+    subtitle: "La cocina ancestral de Doña Luz Mery y el arte de la guapucha frita",
+    badge: "Gastronomía Viva",
+    chronicle: {
+      title: "Crónica de Doña Luz: El secreto que no cabe en un recetario",
+      text: "Doña Luz Mery aprendió a cocinar no con recetas escritas ni libros de alta cocina, sino observando las manos curtidas de su madre a la luz de una vela y al calor de la leña de aliso. En la cocina campesina de Fúquene, el tiempo no se mide en minutos de reloj, sino en el aroma que desprende la sartén y en el chisporroteo del aceite que anuncia el momento exacto en que la guapucha alcanza su crocancia dorada. Su cocina es un templo de memoria viva donde cada bocado rinde tributo al esfuerzo del pescador y a la generosidad de la laguna."
+    },
+    ingredients: [
+      { name: "Guapuchas frescas", desc: "Recién pescadas en la madrugada, limpias y firmes.", icon: "🐟" },
+      { name: "Harina de trigo o maíz", desc: "Para un rebozado fino que selle los jugos interiores.", icon: "🌾" },
+      { name: "Sal marina y cebolla larga picada", desc: "El sazón exacto machacado en mortero de piedra.", icon: "🧂" },
+      { name: "Manteca tradicional o aceite vegetal", desc: "Suficiente para sumergir el pescado a temperatura alta constante.", icon: "🫒" },
+      { name: "Papas criollas o nativas cocidas", desc: "Acompañamiento andino clásico con piel dorada y tierna.", icon: "🥔" },
+      { name: "Gotas de limón fresco", desc: "El toque cítrico final que equilibra el sabor del agua dulce.", icon: "🍋" }
+    ],
+    recipeSteps: [
+      { step: 1, title: "Lavado y salmuera suave", desc: "Se lavan las guapuchas con agua fría de manantial y se dejan reposar en una salmuera ligera con gotas de limón para desflecar." },
+      { step: 2, title: "Enharinado ligero", desc: "Se pasan suavemente por una fina capa de harina sazonada con comino, cebolla larga y sal, sacudiendo el exceso." },
+      { step: 3, title: "Fritura en paila de hierro", desc: "En manteca bien caliente, se sumergen durante 3 a 4 minutos hasta obtener un tono dorado brillante y textura crujiente." },
+      { step: 4, title: "Emplatado tradicional", desc: "Se sirven calientes en canastillos o platos de barro, acompañadas de papas criollas al vapor y rodajas de limón fresco." }
+    ],
+    tips: "«El verdadero secreto no es el fuego alto, sino el cariño y la paciencia. La guapucha se voltea solo una vez, cuando la misma paila te avisa con su crujido.» — Doña Luz Mery"
+  },
+
+  miniGame: {
+    title: "¡Arma tu plato!",
+    subtitle: "Minijuego interactivo de cocina tradicional",
+    instructions: "Elige tu personaje cocinero, atiende el pedido del comensal, selecciona los ingredientes autóctonos correctos y cocina el plato perfecto guiado por Doña Luz.",
+    characters: [
+      { id: "perla", name: "Perla", role: "Aprendiz entusiasta de cocina campesina", avatar: "👩‍🍳" },
+      { id: "alejo", name: "Alejo", role: "Joven pescador y ayudante de fogón", avatar: "🧑‍🍳" },
+      { id: "luz-mery", name: "Doña Luz Mery", role: "Maestra cocinera tradicional de Fúquene", avatar: "👵" }
+    ]
+  },
+
+  survey: {
+    title: "Encuesta – Guapuchas: Latidos de Fúquene",
+    subtitle: "Ayúdanos a evaluar el impacto de este recorrido cultural y ecológico",
+    questions: [
+      {
+        id: "q1",
+        question: "¿Sabías de la existencia de la guapucha antes de visitar este sitio web?",
+        options: ["Sí, la conocía muy bien", "Había oído hablar de ella brevemente", "No, no la conocía para nada"]
+      },
+      {
+        id: "q2",
+        question: "¿Qué aspecto te pareció más valioso del recorrido interactivo?",
+        options: ["Los personajes y modelos 3D interactivos", "Los testimonios y audios de los pescadores", "La receta tradicional y el minijuego de cocina", "Los datos ecológicos y de distribución de la laguna"]
+      },
+      {
+        id: "q3",
+        question: "¿Consideras importante salvaguardar la gastronomía asociada a especies nativas como la guapucha?",
+        options: ["Totalmente de acuerdo, es patrimonio biocultural", "De acuerdo, pero priorizando la conservación ecológica", "Neutral", "En desacuerdo"]
+      },
+      {
+        id: "q4",
+        question: "¿Visitarías la Laguna de Fúquene para conocer su comunidad y probar sus platos tradicionales?",
+        options: ["¡Definitivamente sí!", "Probablemente sí en mis próximas vacaciones", "Tal vez, si hay más oferta ecoturística", "No por el momento"]
+      },
+      {
+        id: "q5",
+        question: "¿Cómo calificarías tu experiencia general en esta plataforma?",
+        options: ["⭐⭐⭐⭐⭐ Excelente", "⭐⭐⭐⭐ Muy buena", "⭐⭐⭐ Buena", "⭐⭐ Regular"]
+      }
+    ]
+  },
+
+  contacts: {
+    title: "Contactos – Detrás de las Guapuchas",
+    subtitle: "El equipo y la comunidad que hacen latir este proyecto",
+    description: "Este proyecto nace del amor por la Laguna de Fúquene, sus aguas andinas y las manos trabajadoras de las familias pescadoras y cocineras que custodian la memoria de la guapucha. Es un homenaje biocultural digital para conectar a las nuevas generaciones con nuestras raíces vivas.",
+    gratitude: [
+      "Comunidad de pescadores artesanales de la Laguna de Fúquene",
+      "Doña Luz Mery y las sabedoras culinarias de la cuenca",
+      "Guardianes ecológicos y colectivos ambientales del altiplano cundiboyacense",
+      "Investigadores y biólogos dedicados a la protección de Grundulus bogotensis"
+    ],
+    feedbackTitle: "Nos puedes dar una idea plis",
+    feedbackDesc: "Tus sugerencias, recuerdos y aportes nos ayudan a enriquecer este espacio interactivo. ¡Escríbenos tu idea!"
   }
 };
