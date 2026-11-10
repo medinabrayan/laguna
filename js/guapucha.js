@@ -613,3 +613,296 @@ class FishManager {
     }
   }
 }
+
+// Visor e Inspector 3D interactivo de anatomía y escamas de la Guapucha (Página 3)
+class GuapuchaInspector3D {
+  constructor(containerId, infoDisplayId) {
+    this.container = document.getElementById(containerId);
+    this.infoDisplay = document.getElementById(infoDisplayId);
+    if (!this.container) return;
+
+    this.scene = null;
+    this.camera = null;
+    this.renderer = null;
+    this.fishGroup = null;
+    this.clickableParts = [];
+    this.raycaster = new THREE.Raycaster();
+    this.mouse = new THREE.Vector2();
+    this.isRotating = true;
+    this.time = 0;
+
+    this.partDetails = {
+      scales: {
+        title: "Escamas y Piel Plateada Iridiscente",
+        desc: "Las escamas de la guapucha poseen un gradiente verde oliva dorsal y flancos plateados con reflejos dorados. Este patrón le permite mimetizarse perfectamente entre los tallos de totora y evitar depredadores aéreos.",
+        icon: "✨🐟"
+      },
+      eyes: {
+        title: "Ojos Grandes de Adaptación Andina",
+        desc: "Ojos amplios y expresivos desarrollados para captar luz en aguas frías de alta montaña (2.540 msnm) y aguas con sedimentos orgánicos y limo.",
+        icon: "👁️🌊"
+      },
+      dorsal: {
+        title: "Aleta Dorsal y Ausencia de Aleta Adiposa",
+        desc: "A diferencia de otros carácidos tropicales, la Grundulus bogotensis carece de aleta adiposa, una adaptación evolutiva milenaria única de los Andes colombianos.",
+        icon: "🌊📐"
+      },
+      tail: {
+        title: "Cola Caudal Bifurcada de Nado Ágil",
+        desc: "Su aleta caudal proporciona arranques veloces y ráfagas de escape cuando es perseguida por garzas o tinguas de la laguna.",
+        icon: "⚡💨"
+      },
+      belly: {
+        title: "Vientre Plateado y Espinas Tiernas",
+        desc: "Al carecer de espinas duras o punzantes, la guapucha se consume entera en la gastronomía de Fúquene, aportando una alta concentración de calcio, fósforo y omega natural.",
+        icon: "🍲🌾"
+      }
+    };
+
+    this.init();
+  }
+
+  init() {
+    this.scene = new THREE.Scene();
+
+    const w = this.container.clientWidth || 360;
+    const h = this.container.clientHeight || 320;
+    this.camera = new THREE.PerspectiveCamera(42, w / h, 0.1, 100);
+    this.camera.position.set(0, 0.5, 4.8);
+
+    this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    this.renderer.setSize(w, h);
+    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    this.container.appendChild(this.renderer.domElement);
+
+    const ambient = new THREE.AmbientLight(0xdcf8f3, 0.95);
+    this.scene.add(ambient);
+
+    const sun = new THREE.DirectionalLight(0xfffaea, 1.4);
+    sun.position.set(4, 5, 4);
+    this.scene.add(sun);
+
+    const rim = new THREE.DirectionalLight(0x38e8cb, 0.8);
+    rim.position.set(-4, -2, -2);
+    this.scene.add(rim);
+
+    this.createDetailedFish();
+    this.setupEvents();
+    this.animate();
+  }
+
+  createDetailedFish() {
+    this.fishGroup = new THREE.Group();
+
+    // Material de piel con escamas brillantes
+    const canvas = document.createElement("canvas");
+    canvas.width = 512;
+    canvas.height = 256;
+    const ctx = canvas.getContext("2d");
+    const grad = ctx.createLinearGradient(0, 0, 0, 256);
+    grad.addColorStop(0.0, "#2c4a3b");
+    grad.addColorStop(0.3, "#4d735f");
+    grad.addColorStop(0.48, "#1a2c22");
+    grad.addColorStop(0.55, "#a8cfc0");
+    grad.addColorStop(0.8, "#e6f2ec");
+    grad.addColorStop(1.0, "#ffffff");
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, 512, 256);
+
+    ctx.fillStyle = "rgba(255, 255, 255, 0.2)";
+    for (let i = 0; i < 300; i++) {
+      ctx.beginPath();
+      ctx.arc(Math.random() * 512, 60 + Math.random() * 140, 2 + Math.random() * 3, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    const tex = new THREE.CanvasTexture(canvas);
+    this.bodyMat = new THREE.MeshStandardMaterial({
+      map: tex,
+      roughness: 0.25,
+      metalness: 0.35
+    });
+
+    this.finMat = new THREE.MeshStandardMaterial({
+      color: 0x98e8d8,
+      transparent: true,
+      opacity: 0.85,
+      roughness: 0.15,
+      side: THREE.DoubleSide
+    });
+
+    // 1. Cuerpo principal (Escamas / Tronco)
+    const bodyGeom = new THREE.CylinderGeometry(0.4, 0.8, 2.4, 16);
+    bodyGeom.rotateZ(Math.PI / 2);
+    bodyGeom.scale(1.0, 1.35, 0.7);
+    const bodyMesh = new THREE.Mesh(bodyGeom, this.bodyMat);
+    bodyMesh.userData = { partKey: 'scales' };
+    this.fishGroup.add(bodyMesh);
+    this.clickableParts.push(bodyMesh);
+
+    // Hocico
+    const snoutGeom = new THREE.ConeGeometry(0.48, 1.0, 14);
+    snoutGeom.rotateZ(-Math.PI / 2);
+    snoutGeom.scale(1.0, 1.25, 0.65);
+    const snout = new THREE.Mesh(snoutGeom, this.bodyMat);
+    snout.position.x = 1.6;
+    snout.userData = { partKey: 'scales' };
+    this.fishGroup.add(snout);
+    this.clickableParts.push(snout);
+
+    // Ojos interactivos
+    const eyeMat = new THREE.MeshStandardMaterial({ color: 0xdfbe64, roughness: 0.2, metalness: 0.8 });
+    const pupilMat = new THREE.MeshBasicMaterial({ color: 0x050807 });
+    [-1, 1].forEach((side) => {
+      const eyeGroup = new THREE.Group();
+      eyeGroup.position.set(1.3, 0.2, side * 0.42);
+
+      const iris = new THREE.Mesh(new THREE.SphereGeometry(0.16, 12, 12), eyeMat);
+      const pupil = new THREE.Mesh(new THREE.SphereGeometry(0.1, 10, 10), pupilMat);
+      pupil.position.z = side * 0.08;
+
+      eyeGroup.add(iris);
+      eyeGroup.add(pupil);
+      eyeGroup.userData = { partKey: 'eyes' };
+      iris.userData = { partKey: 'eyes' };
+      pupil.userData = { partKey: 'eyes' };
+      this.fishGroup.add(eyeGroup);
+      this.clickableParts.push(iris);
+    });
+
+    // Aleta Dorsal
+    const dorsalGeom = new THREE.BufferGeometry();
+    const dorsalVerts = new Float32Array([
+      -0.6, 0.8, 0.0,
+      -0.1, 1.6, 0.0,
+      0.5, 0.75, 0.0
+    ]);
+    dorsalGeom.setAttribute("position", new THREE.BufferAttribute(dorsalVerts, 3));
+    dorsalGeom.computeVertexNormals();
+    const dorsal = new THREE.Mesh(dorsalGeom, this.finMat);
+    dorsal.userData = { partKey: 'dorsal' };
+    this.fishGroup.add(dorsal);
+    this.clickableParts.push(dorsal);
+
+    // Vientre
+    const bellyGeom = new THREE.BufferGeometry();
+    const bellyVerts = new Float32Array([
+      -0.4, -0.65, 0.0,
+      -1.1, -1.2, 0.0,
+      -0.8, -0.5, 0.0
+    ]);
+    bellyGeom.setAttribute("position", new THREE.BufferAttribute(bellyVerts, 3));
+    bellyGeom.computeVertexNormals();
+    const belly = new THREE.Mesh(bellyGeom, this.finMat);
+    belly.userData = { partKey: 'belly' };
+    this.fishGroup.add(belly);
+    this.clickableParts.push(belly);
+
+    // Cola Caudal
+    const caudalGeom = new THREE.BufferGeometry();
+    const caudalVerts = new Float32Array([
+      -1.2, 0.0, 0.0,
+      -2.5, 1.15, 0.0,
+      -2.0, 0.0, 0.0,
+      -1.2, 0.0, 0.0,
+      -2.0, 0.0, 0.0,
+      -2.5, -1.15, 0.0
+    ]);
+    caudalGeom.setAttribute("position", new THREE.BufferAttribute(caudalVerts, 3));
+    caudalGeom.computeVertexNormals();
+    const caudal = new THREE.Mesh(caudalGeom, this.finMat);
+    caudal.userData = { partKey: 'tail' };
+    this.fishGroup.add(caudal);
+    this.clickableParts.push(caudal);
+
+    this.fishGroup.scale.set(0.9, 0.9, 0.9);
+    this.scene.add(this.fishGroup);
+  }
+
+  setupEvents() {
+    let isDown = false;
+    let prevX = 0;
+
+    const onPointerDown = (e) => {
+      isDown = true;
+      this.isRotating = false;
+      prevX = e.clientX || (e.touches && e.touches[0].clientX);
+    };
+
+    const onPointerMove = (e) => {
+      if (!isDown) return;
+      const x = e.clientX || (e.touches && e.touches[0].clientX);
+      const dx = x - prevX;
+      prevX = x;
+      if (this.fishGroup) {
+        this.fishGroup.rotation.y += dx * 0.02;
+      }
+    };
+
+    const onPointerUp = () => {
+      isDown = false;
+      setTimeout(() => { this.isRotating = true; }, 2200);
+    };
+
+    this.container.addEventListener('mousedown', onPointerDown);
+    window.addEventListener('mousemove', onPointerMove);
+    window.addEventListener('mouseup', onPointerUp);
+
+    this.container.addEventListener('touchstart', onPointerDown, { passive: true });
+    window.addEventListener('touchmove', onPointerMove, { passive: true });
+    window.addEventListener('touchend', onPointerUp);
+
+    // Clic en las escamas / partes de la Guapucha
+    this.container.addEventListener('click', (e) => {
+      const rect = this.container.getBoundingClientRect();
+      this.mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+      this.mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+
+      this.raycaster.setFromCamera(this.mouse, this.camera);
+      const intersects = this.raycaster.intersectObjects(this.clickableParts, true);
+
+      if (intersects.length > 0) {
+        const hit = intersects[0].object;
+        const partKey = hit.userData.partKey || 'scales';
+        this.selectPart(partKey);
+
+        if (window.soundEngine) {
+          window.soundEngine.playWaterDrop(0.22, 680);
+        }
+      }
+    });
+  }
+
+  selectPart(partKey) {
+    const data = this.partDetails[partKey];
+    if (!data || !this.infoDisplay) return;
+
+    this.infoDisplay.innerHTML = `
+      <div class="anatomy-badge">${data.icon} ${data.title}</div>
+      <p class="anatomy-text">${data.desc}</p>
+    `;
+
+    // Efecto de giro y salto reactivo
+    if (this.fishGroup) {
+      this.fishGroup.rotation.z = (Math.random() - 0.5) * 0.3;
+      setTimeout(() => { if (this.fishGroup) this.fishGroup.rotation.z = 0; }, 350);
+    }
+  }
+
+  animate() {
+    requestAnimationFrame(() => this.animate());
+    this.time += 0.035;
+
+    if (this.fishGroup) {
+      if (this.isRotating) {
+        this.fishGroup.rotation.y += 0.012;
+      }
+      this.fishGroup.position.y = Math.sin(this.time) * 0.08;
+    }
+
+    this.renderer.render(this.scene, this.camera);
+  }
+}
+
+window.GuapuchaInspector3D = GuapuchaInspector3D;
+
