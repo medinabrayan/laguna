@@ -1,11 +1,14 @@
-// audio.js - Motor de audio procedural Web Audio API para la Laguna de Fúquene
+// audio.js - Motor de audio procedural Web Audio API y controlador de pistas para la Laguna de Fúquene
 class SoundEngine {
   constructor() {
     this.ctx = null;
     this.isMuted = true;
     this.ambientGain = null;
     this.sfxGain = null;
+    this.musicGain = null;
     this.initialized = false;
+    this.currentMusicTimer = null;
+    this.isPlayingMusic = false;
   }
 
   init() {
@@ -28,13 +31,18 @@ class SoundEngine {
 
   setupMaster() {
     this.masterGain = this.ctx.createGain();
-    this.masterGain.gain.setValueAtTime(0.7, this.ctx.currentTime);
+    this.masterGain.gain.setValueAtTime(0.75, this.ctx.currentTime);
     this.masterGain.connect(this.ctx.destination);
 
     // Canal separado para efectos de sonido (gotas, peces, burbujas)
     this.sfxGain = this.ctx.createGain();
-    this.sfxGain.gain.setValueAtTime(0.5, this.ctx.currentTime);
+    this.sfxGain.gain.setValueAtTime(0.6, this.ctx.currentTime);
     this.sfxGain.connect(this.masterGain);
+
+    // Canal para música instrumental ("Soy colombiano")
+    this.musicGain = this.ctx.createGain();
+    this.musicGain.gain.setValueAtTime(0.45, this.ctx.currentTime);
+    this.musicGain.connect(this.masterGain);
   }
 
   setupAmbientSoundscape() {
@@ -67,7 +75,7 @@ class SoundEngine {
     // LFO para modular suavemente el vaivén del agua (oleaje sutil)
     const lfo = this.ctx.createOscillator();
     lfo.type = "sine";
-    lfo.frequency.setValueAtTime(0.2, this.ctx.currentTime); // Oleaje cada 5 segundos
+    lfo.frequency.setValueAtTime(0.2, this.ctx.currentTime);
 
     const lfoGain = this.ctx.createGain();
     lfoGain.gain.setValueAtTime(160, this.ctx.currentTime);
@@ -76,7 +84,6 @@ class SoundEngine {
     whiteNoise.connect(waterFilter);
 
     this.ambientGain = this.ctx.createGain();
-    // Inicia en silencio si isMuted = true
     this.ambientGain.gain.setValueAtTime(this.isMuted ? 0 : 0.35, this.ctx.currentTime);
     waterFilter.connect(this.ambientGain);
     this.ambientGain.connect(this.masterGain);
@@ -84,7 +91,6 @@ class SoundEngine {
     whiteNoise.start();
     lfo.start();
 
-    // 2. Tintineo sutil de gotas y pequeñas ondas periódicas
     this.scheduleDroplets();
   }
 
@@ -162,7 +168,7 @@ class SoundEngine {
     } catch (e) {}
   }
 
-  // Sonido de comer / interactuar con alimento
+  // Sonido de burbuja / chasquido
   playBubblePop(freq = 700) {
     if (!this.initialized) this.init();
     if (!this.ctx) return;
@@ -186,6 +192,176 @@ class SoundEngine {
       osc.start(now);
       osc.stop(now + 0.1);
     } catch (e) {}
+  }
+
+  // Sonido realista de fritura y chisporroteo en la paila de hierro
+  playSizzle(duration = 2.5) {
+    if (!this.initialized) this.init();
+    if (!this.ctx) return;
+    if (this.ctx.state === "suspended") this.ctx.resume();
+
+    try {
+      const sampleRate = this.ctx.sampleRate;
+      const bufferSize = sampleRate * duration;
+      const buffer = this.ctx.createBuffer(1, bufferSize, sampleRate);
+      const output = buffer.getChannelData(0);
+
+      for (let i = 0; i < bufferSize; i++) {
+        output[i] = (Math.random() * 2 - 1) * 0.45;
+      }
+
+      const whiteNoise = this.ctx.createBufferSource();
+      whiteNoise.buffer = buffer;
+
+      const bandpass = this.ctx.createBiquadFilter();
+      bandpass.type = "bandpass";
+      bandpass.frequency.setValueAtTime(2200, this.ctx.currentTime);
+      bandpass.Q.setValueAtTime(1.1, this.ctx.currentTime);
+
+      const gain = this.ctx.createGain();
+      const now = this.ctx.currentTime;
+      gain.gain.setValueAtTime(0.001, now);
+      gain.gain.linearRampToValueAtTime(0.22, now + 0.12);
+      gain.gain.setValueAtTime(0.20, now + duration - 0.25);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+
+      whiteNoise.connect(bandpass);
+      bandpass.connect(gain);
+      gain.connect(this.sfxGain || this.masterGain);
+
+      whiteNoise.start(now);
+      whiteNoise.stop(now + duration);
+    } catch (e) {}
+  }
+
+  // Acorde triunfal campesino al completar una etapa
+  playSuccessChime() {
+    if (!this.initialized) this.init();
+    if (!this.ctx) return;
+    const notes = [523.25, 659.25, 783.99, 1046.50];
+    notes.forEach((freq, i) => {
+      setTimeout(() => {
+        this.playWaterDrop(0.22, freq);
+      }, i * 85);
+    });
+  }
+
+  // Melodía instrumental tradicional colombiana por defecto ("Soy Colombiano" - bambuco andino)
+  // Sintetizada proceduralmente para sonar sin necesidad de archivos externos
+  playSoyColombianoInstrumental(onEndCallback = null) {
+    if (!this.initialized) this.init();
+    if (!this.ctx) return;
+    if (this.ctx.state === "suspended") this.ctx.resume();
+
+    this.stopSoyColombiano();
+    this.isPlayingMusic = true;
+
+    // Notas de bambuco andino: Re, Fa#, Sol, La, Si, Do#, Re
+    // Frecuencias principales de la melodía de "Soy colombiano"
+    const notes = [
+      { f: 293.66, d: 0.35 }, // D4
+      { f: 369.99, d: 0.35 }, // F#4
+      { f: 440.00, d: 0.45 }, // A4
+      { f: 440.00, d: 0.35 }, // A4
+      { f: 493.88, d: 0.55 }, // B4
+      { f: 440.00, d: 0.40 }, // A4
+      { f: 369.99, d: 0.35 }, // F#4
+      { f: 293.66, d: 0.55 }, // D4
+      { f: 329.63, d: 0.35 }, // E4
+      { f: 369.99, d: 0.45 }, // F#4
+      { f: 440.00, d: 0.40 }, // A4
+      { f: 369.99, d: 0.35 }, // F#4
+      { f: 329.63, d: 0.55 }, // E4
+      { f: 293.66, d: 0.80 }, // D4
+      // Frase 2
+      { f: 440.00, d: 0.35 }, // A4
+      { f: 493.88, d: 0.35 }, // B4
+      { f: 587.33, d: 0.55 }, // D5
+      { f: 587.33, d: 0.40 }, // D5
+      { f: 554.37, d: 0.35 }, // C#5
+      { f: 493.88, d: 0.45 }, // B4
+      { f: 440.00, d: 0.70 }  // A4
+    ];
+
+    let timeCursor = this.ctx.currentTime + 0.1;
+    const playNote = (freq, duration, t) => {
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+
+      // Timbre cálido de flauta/tiple andino (triángulo con armónicos suaves)
+      osc.type = "triangle";
+      osc.frequency.setValueAtTime(freq, t);
+
+      gain.gain.setValueAtTime(0.001, t);
+      gain.gain.linearRampToValueAtTime(0.28, t + 0.05);
+      gain.gain.exponentialRampToValueAtTime(0.001, t + duration * 0.95);
+
+      osc.connect(gain);
+      gain.connect(this.musicGain);
+
+      osc.start(t);
+      osc.stop(t + duration);
+    };
+
+    notes.forEach((n) => {
+      playNote(n.f, n.d, timeCursor);
+      timeCursor += n.d * 1.05;
+    });
+
+    const totalDuration = (timeCursor - this.ctx.currentTime) * 1000;
+    this.currentMusicTimer = setTimeout(() => {
+      this.isPlayingMusic = false;
+      if (onEndCallback) onEndCallback();
+    }, totalDuration);
+  }
+
+  stopSoyColombiano() {
+    if (this.currentMusicTimer) {
+      clearTimeout(this.currentMusicTimer);
+      this.currentMusicTimer = null;
+    }
+    this.isPlayingMusic = false;
+    if (this.musicGain && this.ctx) {
+      this.musicGain.gain.setValueAtTime(0.001, this.ctx.currentTime);
+      setTimeout(() => {
+        if (this.musicGain && this.ctx) this.musicGain.gain.setValueAtTime(0.45, this.ctx.currentTime);
+      }, 100);
+    }
+  }
+
+  // Reproducción de audio por defecto para entrevistas (generador de tono ambiental y murmullo)
+  playInterviewPlaceholder(type = 'pescador', onEnd = null) {
+    if (!this.initialized) this.init();
+    if (!this.ctx) return;
+    if (this.ctx.state === "suspended") this.ctx.resume();
+
+    const now = this.ctx.currentTime;
+    const osc = this.ctx.createOscillator();
+    const gain = this.ctx.createGain();
+    const filter = this.ctx.createBiquadFilter();
+
+    osc.type = "sine";
+    const baseFreq = type === 'pescador' ? 140 : (type === 'luz_mery' ? 240 : 180);
+    osc.frequency.setValueAtTime(baseFreq, now);
+
+    filter.type = "bandpass";
+    filter.frequency.setValueAtTime(450, now);
+
+    gain.gain.setValueAtTime(0.001, now);
+    gain.gain.linearRampToValueAtTime(0.18, now + 0.1);
+    gain.gain.setValueAtTime(0.18, now + 3.8);
+    gain.gain.linearRampToValueAtTime(0.001, now + 4.2);
+
+    osc.connect(filter);
+    filter.connect(gain);
+    gain.connect(this.sfxGain);
+
+    osc.start(now);
+    osc.stop(now + 4.3);
+
+    setTimeout(() => {
+      if (onEnd) onEnd();
+    }, 4300);
   }
 
   toggleMute() {
