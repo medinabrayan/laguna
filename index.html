@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GUAPUCHAS - Un sabor que nace debajo del agua | Laguna de Fúquene</title>
+  <title>Guapuchas latidos de Fúquene | Saberes, Gastronomía y Memoria Viva</title>
   
-  <!-- Estilos principales -->
+  <!-- Estilos principales sobrios y naturales -->
   <link rel="stylesheet" href="css/style.css">
 
   <!-- Three.js cargado localmente para total fiabilidad y funcionamiento offline -->
@@ -13,265 +13,1029 @@
 </head>
 <body>
 
-  <!-- Lienzo Three.js para la laguna 3D, peces y efectos de agua -->
-  <div id="three-canvas-container"></div>
+  <!-- Barra de Navegación Superior Fija y Sobria -->
+  <header class="hud-controls">
+    <div class="hud-brand">
+      <span class="brand-pill">Fúquene</span>
+      <span class="brand-name">Guapuchas</span>
+    </div>
 
-  <!-- Capa de la interfaz y la infografía -->
-  <div id="app-viewport">
+    <nav class="hud-nav">
+      <a href="#hero" class="nav-link">Inicio</a>
+      <a href="#mapa-del-tesoro" class="nav-link">Ruta</a>
+      <a href="#lago-de-guapuchas" class="nav-link">El Lago 3D</a>
+      <a href="#donde-estamos" class="nav-link">¿Dónde estamos?</a>
+      <a href="#que-es-guapucha" class="nav-link">Guapucha 3D</a>
+      <a href="#escucha-el-territorio" class="nav-link">Voces</a>
+      <a href="#no-esta-en-un-libro" class="nav-link">Receta & Juego</a>
+      <a href="#encuesta" class="nav-link">Encuesta</a>
+      <a href="#contactos" class="nav-link">Contactos</a>
+    </nav>
 
-    <!-- Barra de Controles Interactivos Flotante -->
-    <header class="hud-controls">
-      <button id="btn-audio" class="hud-btn" title="Activar/Desactivar Paisaje Sonoro">
+    <div class="hud-actions">
+      <button id="btn-audio" class="hud-btn" title="Activar/Silenciar sonido de la laguna">
         <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
         <span id="audio-label">Sonido: Silenciado</span>
       </button>
+    </div>
+  </header>
 
-      <button id="btn-feed" class="hud-btn" title="Modo Alimentar Guapuchas">
-        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14h2v2h-2v-2zm0-10h2v8h-2V6z"/></svg>
-        <span id="feed-label">Alimentar Peces</span>
-      </button>
+  <!-- Envoltorio principal con diseño sobrio y natural -->
+  <div id="app-viewport">
 
-      <button id="btn-add-fish" class="hud-btn" title="Añadir más Guapuchas al cardumen">
-        <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-        <span>+ Pez</span>
-      </button>
+    <!-- SECCIÓN HERO: PAISAJE DE LA SABANA CUNDIBOYACENSE -->
+    <header class="hero-section" id="hero">
+      <div class="hero-content">
+        <div class="hero-nature-tag">🌾 Altiplano Cundiboyacense • 2.540 msnm • Memoria Biocultural</div>
+        <h1 class="hero-title">Guapuchas latidos de Fúquene</h1>
+        <p class="hero-subtitle">Un recorrido interactivo por la memoria viva, la gastronomía y las voces de la Laguna de Fúquene.</p>
 
-      <button id="btn-view-mode" class="hud-btn" title="Cambiar a Vista Acuario 3D">
-        <svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
-        <span id="view-mode-label">Acuario 3D</span>
-      </button>
+        <div class="hero-characters-badges">
+          <div class="char-badge">
+            <span class="badge-emoji">🐟</span>
+            <span>Leo la Guapucha</span>
+          </div>
+          <div class="char-badge">
+            <span class="badge-emoji">👵</span>
+            <span>Doña Luz Mery</span>
+          </div>
+          <div class="char-badge">
+            <span class="badge-emoji">🛶</span>
+            <span>Don Álvaro Pescador</span>
+          </div>
+        </div>
+
+        <div class="hero-actions">
+          <a href="#mapa-del-tesoro" id="btn-comienza-viaje" class="btn-primary">
+            <span>Comienza el viaje</span>
+            <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+          </a>
+          <a href="#lago-de-guapuchas" class="btn-secondary">
+            <span>🐟 Ver el Lago y Alimentar Peces</span>
+          </a>
+          <a href="#no-esta-en-un-libro" class="btn-secondary">
+            <span>🍳 Minijuego "¡Arma tu plato!"</span>
+          </a>
+        </div>
+      </div>
     </header>
 
-    <!-- Región Superior: Pestaña, Título "GUAPUCHAS" y Nota de Fúquene -->
-    <section class="header-region">
-      <!-- Pestaña azul colgante izquierda -->
-      <div class="ribbon-tab">
-        <svg viewBox="0 0 24 24"><path d="M12 2L4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3z"/></svg>
+    <!-- SECCIÓN: EL LAGO DE LAS GUAPUCHAS (CARDUMEN 3D Y ALIMENTACIÓN) -->
+    <section class="content-section" id="lago-de-guapuchas">
+      <div class="section-header">
+        <span class="section-tag">🐟 Estanque Interactivo de la Laguna</span>
+        <h2 class="section-title">El Lago de las Guapuchas</h2>
+        <p class="section-desc">Observa a las guapuchas nadando libremente en las aguas frías de Fúquene. Haz clic sobre el agua para alimentarlas, generar ondas o interactuar con el cardumen.</p>
       </div>
 
-      <!-- Banner Central -->
-      <div class="title-banner">
-        <h1>GUAPUCHAS</h1>
-        <div class="subtitle">Un sabor que nace debajo del agua</div>
-      </div>
+      <div class="lake-card">
+        <!-- Barra de herramientas del estanque -->
+        <div class="lake-controls-bar">
+          <div class="lake-buttons-group">
+            <button id="btn-feed" class="lake-btn" title="Modo Alimento">
+              <span id="feed-label">🌾 Alimentar Guapuchas</span>
+            </button>
+            <button id="btn-add-fish" class="lake-btn" title="Añadir un pez más">
+              <span>➕ + Pez al Cardumen</span>
+            </button>
+            <button id="btn-lake-audio" class="lake-btn" title="Activar sonido del agua">
+              <span>🔊 Paisaje Sonoro</span>
+            </button>
+          </div>
 
-      <!-- Nota Superior Derecha -->
-      <div class="header-side-note">
-        <a id="link-fuquene" title="Conocer más sobre Fúquene">Un viaje por Fúquene</a>
+          <div class="lake-status-badge">
+            Cardumen en vivo: <strong id="lake-fish-count">16</strong> peces
+          </div>
+        </div>
+
+        <!-- Contenedor 3D Three.js específico del Lago -->
+        <div id="three-canvas-container" class="lake-canvas-box"></div>
+
+        <div class="lake-footer-hint">
+          <span>💧 <strong>Interacción:</strong> Haz clic en el agua para lanzar alimento o tocar a una guapucha. El efecto acuático de burbujas se concentra en este estanque.</span>
+        </div>
       </div>
     </section>
 
-    <!-- Contenedor scroll/zoom responsive -->
-    <div class="infographic-scroll-wrapper" id="infographic-wrapper">
-      <main class="infographic-canvas" id="infographic-board">
-        
-        <!-- Lienzo SVG para las líneas de conexión dinámicas entre hexágonos -->
-        <svg id="connections-svg"></svg>
-
-      <!-- Template reutilizable de hexágono SVG definido dentro de cada nodo -->
-
-      <!-- FILA SUPERIOR / CATEGORÍAS PRINCIPALES (AZULES) -->
-      <div class="hex-node style-blue" id="node-inicio" data-id="inicio" style="left: 17%; top: 75px;">
-        <svg class="hex-shape" viewBox="0 0 100 87">
-          <polygon points="50,2 98,23 98,64 50,85 2,64 2,23" />
-        </svg>
-        <span class="hex-label">Inicio</span>
+    <!-- SECCIÓN 1: MAPA ILUSTRADO DEL TESORO -->
+    <section class="content-section" id="mapa-del-tesoro">
+      <div class="section-header">
+        <span class="section-tag">🗺️ Expedición Territorial</span>
+        <h2 class="section-title">Mapa ilustrado del tesoro</h2>
+        <p class="section-desc">Este mapa interactivo te guiará por los 5 puntos cardinales de la memoria y la vida en la Laguna de Fúquene. Haz clic en cada parada para navegar a su estación.</p>
       </div>
 
-      <div class="hex-node style-blue" id="node-donde-estamos" data-id="donde-estamos" style="left: 27%; top: 145px;">
-        <svg class="hex-shape" viewBox="0 0 100 87">
-          <polygon points="50,2 98,23 98,64 50,85 2,64 2,23" />
-        </svg>
-        <span class="hex-label">¿Donde<br>estamos?</span>
+      <div class="treasure-route-grid">
+        <a href="#donde-estamos" class="route-box">
+          <span class="route-step-pill">Punto 1</span>
+          <div class="route-icon">🌊</div>
+          <h3 class="route-heading">Laguna de Fúquene</h3>
+          <span class="route-category">¿Dónde estamos?</span>
+          <p class="route-desc">Geografía sagrada, historia milenaria y el santuario muisca del agua andina.</p>
+          <span class="route-action">Explorar estación &rarr;</span>
+        </a>
+
+        <a href="#que-es-guapucha" class="route-box">
+          <span class="route-step-pill">Punto 2</span>
+          <div class="route-icon">🐟</div>
+          <h3 class="route-heading">Guapucha</h3>
+          <span class="route-category">¿Qué es una guapucha?</span>
+          <p class="route-desc">Anatomía 3D interactiva, biología endémica y gráficos de impacto socioeconómico.</p>
+          <span class="route-action">Inspeccionar 3D &rarr;</span>
+        </a>
+
+        <a href="#escucha-el-territorio" class="route-box">
+          <span class="route-step-pill">Punto 3</span>
+          <div class="route-icon">🎙️</div>
+          <h3 class="route-heading">Comunidad</h3>
+          <span class="route-category">Escucha el territorio</span>
+          <p class="route-desc">Relatos en audio de pescadores y galería de fotos colaborativa con la comunidad.</p>
+          <span class="route-action">Escuchar testimonios &rarr;</span>
+        </a>
+
+        <a href="#no-esta-en-un-libro" class="route-box">
+          <span class="route-step-pill">Punto 4</span>
+          <div class="route-icon">🍳</div>
+          <h3 class="route-heading">Luz Mery</h3>
+          <span class="route-category">No está en un libro</span>
+          <p class="route-desc">Crónica culinaria, ingredientes campesinos y el minijuego ¡Arma tu plato!</p>
+          <span class="route-action">Aprender la receta &rarr;</span>
+        </a>
+
+        <a href="#contactos" class="route-box">
+          <span class="route-step-pill">Punto 5</span>
+          <div class="route-icon">💌</div>
+          <h3 class="route-heading">Contáctanos</h3>
+          <span class="route-category">Detrás de las Guapuchas</span>
+          <p class="route-desc">Agradecimientos a las familias de pescadores y buzón de aportes comunitarios.</p>
+          <span class="route-action">Dejar un mensaje &rarr;</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 2: ¿DÓNDE ESTAMOS? -->
+    <section class="content-section" id="donde-estamos">
+      <div class="section-header">
+        <span class="section-tag">📍 Estación 1 • Geografía & Memoria</span>
+        <h2 class="section-title">¿Dónde estamos?</h2>
+        <p class="section-desc">Un recorrido guiado por Leo la Guapucha a través de la Laguna de Fúquene, el santuario natural del altiplano cundiboyacense.</p>
       </div>
 
-      <div class="hex-node style-blue" id="node-que-es-guapucha" data-id="que-es-guapucha" style="left: 39%; top: 85px;">
-        <svg class="hex-shape" viewBox="0 0 100 87">
-          <polygon points="50,2 98,23 98,64 50,85 2,64 2,23" />
-        </svg>
-        <span class="hex-label">¿Qué es una<br>guapucha?</span>
+      <!-- Tarjeta de ambientación musical: Soy Colombiano -->
+      <div class="audio-feature-card">
+        <div class="audio-feature-header">
+          <div class="audio-symbol">🎶</div>
+          <div>
+            <h3 class="audio-feature-title">Tema musical de fondo: Soy colombiano (versión instrumental)</h3>
+            <p class="audio-feature-desc">Melodía andina tradicional en bambuco representativa de la cordillera Oriental colombiana.</p>
+          </div>
+        </div>
+
+        <div class="audio-player-control" data-audio-player="soy-colombiano">
+          <audio id="audio-soy-colombiano" data-audio-src="audio/soy_colombiano.mp3" preload="none"></audio>
+          <button class="audio-play-btn" id="btn-play-soy-colombiano">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            <span>Escuchar tema instrumental</span>
+          </button>
+          <div class="sound-wave-bars">
+            <span></span><span></span><span></span><span></span><span></span><span></span>
+          </div>
+        </div>
       </div>
 
-      <div class="hex-node style-blue" id="node-del-agua-al-plato" data-id="del-agua-al-plato" style="left: 51%; top: 145px;">
-        <svg class="hex-shape" viewBox="0 0 100 87">
-          <polygon points="50,2 98,23 98,64 50,85 2,64 2,23" />
-        </svg>
-        <span class="hex-label">Del agua al<br>plato</span>
+      <!-- Diálogos transcritos completos: Mujer IA & Leo la Guapucha -->
+      <div class="dialogues-stack">
+        <div class="dialogue-entry speaker-woman">
+          <div class="avatar-circle">🎙️</div>
+          <div class="dialogue-body">
+            <div class="dialogue-meta">
+              <strong>Mujer IA</strong>
+              <span class="role-tag">Narradora y Guía del Viaje</span>
+            </div>
+            <p class="dialogue-text">«¡Hola! Bienvenidos a este viaje por la <strong>Laguna de Fúquene</strong>. Hoy no solo vamos a conocer un lugar mágico de Colombia, sino también a un pequeño habitante que guarda los secretos de estas aguas frías: <strong>¡la guapucha!</strong> Y quién mejor para guiarnos que Leo, un pececito muy especial que ha vivido aquí toda su vida.»</p>
+          </div>
+        </div>
+
+        <div class="dialogue-entry speaker-leo">
+          <div class="avatar-circle">🐟</div>
+          <div class="dialogue-body">
+            <div class="dialogue-meta">
+              <strong>Leo la Guapucha</strong>
+              <span class="role-tag">Guardián del Ecosistema</span>
+            </div>
+            <p class="dialogue-text">«¡Hola a todos! Yo soy <strong>Leo</strong>, una guapucha nadadora de Fúquene. Seguro me ves chiquito, pero mi familia lleva nadando en estas aguas desde antes de que existieran los caminos y las carreteras. Aquí entre los juncales y el agua fría aprendí a esquivar peligros, a buscar comida y a escuchar las historias que cuentan los pescadores en sus canoas cuando el sol apenas sale.»</p>
+          </div>
+        </div>
+
+        <div class="dialogue-entry speaker-woman">
+          <div class="avatar-circle">🎙️</div>
+          <div class="dialogue-body">
+            <div class="dialogue-meta">
+              <strong>Mujer IA</strong>
+              <span class="role-tag">Narradora y Guía del Viaje</span>
+            </div>
+            <p class="dialogue-text">«¿Sabías que la laguna ha cambiado mucho con los años? Antes era tan grande que parecía un mar en medio de las montañas. Los abuelos cuentan que sus aguas eran cristalinas y que las guapuchas abundaban por millones. Hoy la laguna enfrenta retos ambientales por el buchón y la sedimentación, pero su corazón sigue latiendo con fuerza gracias al esfuerzo de las familias campesinas.»</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 3: ¿QUÉ ES UNA GUAPUCHA? (ANATOMÍA 3D Y ESTADÍSTICAS) -->
+    <section class="content-section" id="que-es-guapucha">
+      <div class="section-header">
+        <span class="section-tag">🔬 Estación 2 • Biología & Anatomía 3D</span>
+        <h2 class="section-title">¿Qué es una guapucha?</h2>
+        <p class="section-desc">Pez nativo de las aguas frías andinas (<em>Grundulus bogotensis</em>). Interactúa con el modelo 3D y descubre cómo cada rasgo de su anatomía le permite vivir en la alta montaña.</p>
       </div>
 
-      <div class="hex-node style-blue" id="node-no-esta-en-un-libro" data-id="no-esta-en-un-libro" style="left: 63%; top: 85px;">
-        <svg class="hex-shape" viewBox="0 0 100 87">
-          <polygon points="50,2 98,23 98,64 50,85 2,64 2,23" />
-        </svg>
-        <span class="hex-label">No esta en un<br>libro</span>
+      <div class="two-columns-layout">
+        <!-- Visor 3D Interactivo de la Guapucha -->
+        <div class="natural-card">
+          <div class="card-header-row">
+            <span class="card-label-tag">Modelo 3D Interactivo</span>
+            <span class="card-sub-hint">🖱️ Arrastra para girar • Clic en partes anatómicas</span>
+          </div>
+          
+          <div id="guapucha-3d-inspector" class="inspector-canvas-box"></div>
+
+          <!-- Botones de inspección rápida -->
+          <div class="anatomy-buttons-bar">
+            <button class="part-btn" data-part="scales">✨ Escamas</button>
+            <button class="part-btn" data-part="eyes">👁️ Ojos</button>
+            <button class="part-btn" data-part="dorsal">🌊 Aleta Dorsal</button>
+            <button class="part-btn" data-part="belly">🍲 Vientre</button>
+            <button class="part-btn" data-part="tail">⚡ Aleta Caudal</button>
+          </div>
+
+          <!-- Caja de detalles anatómicos reactivos -->
+          <div id="guapucha-anatomy-info" class="anatomy-info-panel">
+            <div class="anatomy-panel-title">✨ Escamas y Piel Plateada Iridiscente</div>
+            <p class="anatomy-panel-desc">Las escamas de la guapucha poseen un gradiente verde oliva dorsal y flancos plateados con reflejos dorados. Este patrón le permite mimetizarse perfectamente entre los tallos de totora y evitar depredadores aéreos.</p>
+          </div>
+        </div>
+
+        <!-- Estadísticas y Gráficos Visuales -->
+        <div class="natural-card">
+          <h3 class="natural-card-title">📊 Datos Bioculturales de Fúquene</h3>
+
+          <!-- Gráfico 1: Distribución Geográfica -->
+          <div class="chart-container">
+            <h4 class="chart-subtitle">Distribución geográfica de la guapucha en la cuenca</h4>
+            <div class="clean-bar-chart">
+              <div class="bar-row">
+                <div class="bar-labels">
+                  <span>Laguna principal (aguas abiertas)</span>
+                  <strong>65%</strong>
+                </div>
+                <div class="bar-base">
+                  <div class="bar-progress bar-blue" style="width: 65%;"></div>
+                </div>
+              </div>
+
+              <div class="bar-row">
+                <div class="bar-labels">
+                  <span>Humedales aledaños y totorales de ribera</span>
+                  <strong>20%</strong>
+                </div>
+                <div class="bar-base">
+                  <div class="bar-progress bar-green" style="width: 20%;"></div>
+                </div>
+              </div>
+
+              <div class="bar-row">
+                <div class="bar-labels">
+                  <span>Ríos y caños tributarios (Ubaté y Suárez)</span>
+                  <strong>15%</strong>
+                </div>
+                <div class="bar-base">
+                  <div class="bar-progress bar-terracotta" style="width: 15%;"></div>
+                </div>
+              </div>
+            </div>
+            <p class="chart-footnote">El 65% de la población se concentra en las aguas abiertas, mientras los totorales periféricos actúan como zonas críticas de desove y refugio biológico.</p>
+          </div>
+
+          <!-- Gráfico 2: Impacto Socioeconómico -->
+          <div class="chart-container">
+            <h4 class="chart-subtitle">Impacto socioeconómico en las familias pescadoras</h4>
+            <div class="clean-bar-chart">
+              <div class="bar-row">
+                <div class="bar-labels">
+                  <span>Alimento propio y seguridad nutricional</span>
+                  <strong>55%</strong>
+                </div>
+                <div class="bar-base">
+                  <div class="bar-progress bar-green" style="width: 55%;"></div>
+                </div>
+              </div>
+
+              <div class="bar-row">
+                <div class="bar-labels">
+                  <span>Comercio local y venta en carretera</span>
+                  <strong>30%</strong>
+                </div>
+                <div class="bar-base">
+                  <div class="bar-progress bar-terracotta" style="width: 30%;"></div>
+                </div>
+              </div>
+
+              <div class="bar-row">
+                <div class="bar-labels">
+                  <span>Trueque tradicional con agricultores</span>
+                  <strong>15%</strong>
+                </div>
+                <div class="bar-base">
+                  <div class="bar-progress bar-gold" style="width: 15%;"></div>
+                </div>
+              </div>
+            </div>
+            <p class="chart-footnote">Más del 50% de la pesca garantiza la alimentación directa y el aporte proteico de las familias de la cuenca lacustre.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 4: ESCUCHA EL TERRITORIO (VOCES Y MURO DE FOTOS) -->
+    <section class="content-section" id="escucha-el-territorio">
+      <div class="section-header">
+        <span class="section-tag">📻 Estación 3 • Voces & Testimonios</span>
+        <h2 class="section-title">Escucha el territorio</h2>
+        <p class="section-desc">Relatos vivos de quienes madrugan a orillas del agua. Escucha los testimonios con audio y explora las memorias fotográficas de la comunidad.</p>
       </div>
 
-      <!-- RAMA 1: IZQUIERDA (TERRITORIO Y TRADICIÓN) -->
-      <div class="hex-node style-white" id="node-escucha-el-territorio" data-id="escucha-el-territorio" style="left: 7.5%; top: 195px;">
-        <!-- Icono de cursor señalando -->
-        <svg class="cursor-pointer-icon" viewBox="0 0 32 32">
-          <path d="M7 2l18 13.5-8.2 1.3 5 8.7-3.8 2.2-5-8.8-4.5 4.5z" fill="#75b5ea" stroke="#255589" stroke-width="2"/>
-        </svg>
-        <svg class="hex-shape" viewBox="0 0 100 87">
-          <polygon points="50,2 98,23 98,64 50,85 2,64 2,23" />
-        </svg>
-        <span class="hex-label">Escucha el<br>territorio</span>
+      <!-- Tarjetas de Audio con transcripción completa -->
+      <div class="three-cards-grid">
+        <!-- Audio 1: Don Álvaro Pescador -->
+        <div class="testimony-box">
+          <div class="testimony-top">
+            <div class="avatar-circle">🛶</div>
+            <div>
+              <h3 class="testimony-person">Testimonio de un pescador tradicional</h3>
+              <span class="testimony-bio">Don Álvaro – Pescador de Fúquene (40 años de oficio)</span>
+            </div>
+          </div>
+
+          <div class="audio-player-control" data-audio-player="pescador">
+            <audio id="audio-pescador" data-audio-src="audio/testimonio_pescador.mp3" preload="none"></audio>
+            <button class="audio-play-btn" data-interview="pescador">
+              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              <span>Escuchar relato de Don Álvaro</span>
+            </button>
+            <div class="sound-wave-bars">
+              <span></span><span></span><span></span><span></span>
+            </div>
+          </div>
+
+          <!-- Modelo 3D de Don Álvaro Pescador -->
+          <div id="pescador-3d-preview" class="pescador-3d-frame"></div>
+          <span class="character-rot-hint">🖱️ Don Álvaro con ruana campesina boyacense y remo (3D)</span>
+
+          <blockquote class="testimony-quote">
+            «Desde las cuatro de la mañana salimos en la canoa de madera. La laguna nos recibe en silencio, solo se oye el viento y el canto de las tingüitas. Cuando tiramos la red, pedimos permiso al agua; la guapucha es un regalo sagrado que no se malgasta, nos ha criado a todos nosotros y a nuestros hijos.»
+          </blockquote>
+        </div>
+
+        <!-- Audio 2: Doña Luz Mery -->
+        <div class="testimony-box">
+          <div class="testimony-top">
+            <div class="avatar-circle">👵</div>
+            <div>
+              <h3 class="testimony-person">Historia de Doña Luz Mery</h3>
+              <span class="testimony-bio">Doña Luz Mery – Sabedora y cocinera tradicional</span>
+            </div>
+          </div>
+
+          <div class="audio-player-control" data-audio-player="luz-mery">
+            <audio id="audio-luz-mery" data-audio-src="audio/historia_luz_mery.mp3" preload="none"></audio>
+            <button class="audio-play-btn" data-interview="luz_mery">
+              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              <span>Escuchar historia de Doña Luz</span>
+            </button>
+            <div class="sound-wave-bars">
+              <span></span><span></span><span></span><span></span>
+            </div>
+          </div>
+
+          <blockquote class="testimony-quote">
+            «Mi mamá me enseñó a preparar las guapuchas con leña de aliso cuando yo tenía apenas diez años. Me decía: 'Mijita, la guapucha se limpia con cariño, no se le quita la escama brava sino con sal marina, y se pone a dorar hasta que quede tostadita como una galleta'. Ese sabor no lo da ninguna sartén moderna, es el sabor de la tierra fría.»
+          </blockquote>
+        </div>
+
+        <!-- Audio 3: Vivencias de la Comunidad -->
+        <div class="testimony-box">
+          <div class="testimony-top">
+            <div class="avatar-circle">🏡</div>
+            <div>
+              <h3 class="testimony-person">Vivencias de la comunidad</h3>
+              <span class="testimony-bio">Relato colectivo de las familias ribereñas</span>
+            </div>
+          </div>
+
+          <div class="audio-player-control" data-audio-player="comunidad">
+            <audio id="audio-comunidad" data-audio-src="audio/vivencias_comunidad.mp3" preload="none"></audio>
+            <button class="audio-play-btn" data-interview="comunidad">
+              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              <span>Escuchar vivencias comunitarias</span>
+            </button>
+            <div class="sound-wave-bars">
+              <span></span><span></span><span></span><span></span>
+            </div>
+          </div>
+
+          <blockquote class="testimony-quote">
+            «La laguna no es solo agua: es nuestra casa, nuestro sustento y nuestra identidad. Antes, los domingos la gente bajaba a orillas de la laguna a compartir un plato de guapuchas fritas con papa criolla y ají casero. Hoy seguimos luchando por limpiarla y cuidarla, para que nuestros nietos también sepan a qué sabe Fúquene.»
+          </blockquote>
+        </div>
       </div>
 
-      <div class="hex-node style-white" id="node-agua" data-id="agua" style="left: 18.5%; top: 250px;">
-        <svg class="hex-shape" viewBox="0 0 100 87">
-          <polygon points="50,2 98,23 98,64 50,85 2,64 2,23" />
-        </svg>
-        <span class="hex-label">Agua</span>
+      <!-- Muro de Fotos y Recuerdos de la Comunidad -->
+      <div class="natural-card wall-container">
+        <div class="wall-top-bar">
+          <div>
+            <h3 class="natural-card-title">📸 Muro de fotos y recuerdos de la comunidad</h3>
+            <p class="wall-subtext">Galería abierta de fotografías y vivencias aportadas por las familias de Fúquene, Guachetá y Simijaca.</p>
+          </div>
+          <button id="btn-toggle-upload" class="btn-primary-small">
+            <span>+ Sube tu foto o recuerdo</span>
+          </button>
+        </div>
+
+        <!-- Formulario interactivo para subir fotos o memorias -->
+        <div id="upload-memory-box" class="upload-panel" style="display: none;">
+          <form id="memory-form" class="clean-form">
+            <div class="form-two-cols">
+              <div class="form-field">
+                <label for="mem-author">Tu nombre o familia:</label>
+                <input type="text" id="mem-author" required placeholder="Ej. Familia Rodríguez Pescadores">
+              </div>
+              <div class="form-field">
+                <label for="mem-title">Título del recuerdo:</label>
+                <input type="text" id="mem-title" required placeholder="Ej. Tarde de pesca en el totoral">
+              </div>
+            </div>
+
+            <div class="form-field">
+              <label for="mem-desc">Historia o anécdota:</label>
+              <textarea id="mem-desc" rows="2" required placeholder="Cuéntanos qué significa este momento para ti y para la laguna..."></textarea>
+            </div>
+
+            <div class="form-two-cols">
+              <div class="form-field">
+                <label for="mem-file">Adjuntar fotografía (opcional):</label>
+                <input type="file" id="mem-file" accept="image/*">
+              </div>
+              <div class="form-buttons-row">
+                <button type="submit" class="btn-primary-small">Publicar en el muro</button>
+                <button type="button" id="btn-cancel-upload" class="btn-cancel">Cancelar</button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <!-- Galería de Tarjetas de Memoria -->
+        <div class="memory-grid" id="memory-grid">
+          <div class="memory-card">
+            <div class="memory-tag" style="background: #244d3e;">Pesca Tradicional</div>
+            <div class="memory-card-body">
+              <h4 class="memory-item-title">Faena matutina al amanecer</h4>
+              <p class="memory-item-text">Canotaje tradicional en la zona de totorales mientras amanece sobre las montañas de Boyacá.</p>
+              <div class="memory-meta">
+                <span>Por Don Álvaro Pescador</span>
+                <time>Ayer a las 5:30 am</time>
+              </div>
+            </div>
+          </div>
+
+          <div class="memory-card">
+            <div class="memory-tag" style="background: #b25634;">Gastronomía</div>
+            <div class="memory-card-body">
+              <h4 class="memory-item-title">Paila de hierro y leña viva</h4>
+              <p class="memory-item-text">El fogón tradicional encendido listo para dorar las guapuchas con el toque crujiente perfecto.</p>
+              <div class="memory-meta">
+                <span>Por Doña Luz Mery</span>
+                <time>Hace 2 días</time>
+              </div>
+            </div>
+          </div>
+
+          <div class="memory-card">
+            <div class="memory-tag" style="background: #234b68;">Conservación</div>
+            <div class="memory-card-body">
+              <h4 class="memory-item-title">Cuidado de la laguna y siembra</h4>
+              <p class="memory-item-text">Jornada comunitaria de limpieza de buchón y siembra de alisos protectores en la ribera norte.</p>
+              <div class="memory-meta">
+                <span>Por Juventud de Simijaca</span>
+                <time>Semana pasada</time>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 5: NO ESTÁ EN UN LIBRO (CRÓNICA, RECETA & MINIJUEGO) -->
+    <section class="content-section" id="no-esta-en-un-libro">
+      <div class="section-header">
+        <span class="section-tag">🍲 Estación 4 • Cocina Ancestral</span>
+        <h2 class="section-title">No está en un libro</h2>
+        <p class="section-desc">Saberes vivos que no se leen: se huelen en la sartén, se prueban con limón y se transmiten al calor del fogón campesino.</p>
       </div>
 
-      <div class="hex-node style-white" id="node-territorio-comunidad" data-id="territorio-comunidad" style="left: 13%; top: 355px;">
-        <svg class="hex-shape" viewBox="0 0 100 87">
-          <polygon points="50,2 98,23 98,64 50,85 2,64 2,23" />
-        </svg>
-        <span class="hex-label">Territorio y<br>comunidad</span>
+      <!-- Crónica de Doña Luz y Personaje 3D -->
+      <div class="two-columns-layout">
+        <div class="natural-card chronicle-box">
+          <h3 class="chronicle-heading">Crónica de Doña Luz: El secreto que no cabe en un recetario</h3>
+          <p class="chronicle-p">
+            Doña Luz Mery aprendió a cocinar no con recetas escritas ni libros de alta cocina, sino observando las manos curtidas de su madre a la luz de una vela y al calor de la leña de aliso. En la cocina campesina de Fúquene, el tiempo no se mide en minutos de reloj, sino en el aroma que desprende la sartén y en el chisporroteo del aceite que anuncia el momento exacto en que la guapucha alcanza su crocancia dorada.
+          </p>
+          <p class="chronicle-p">
+            Su cocina es un templo de memoria viva donde cada bocado rinde tributo al esfuerzo del pescador y a la generosidad de la laguna. No se necesitan ingredientes costosos ni técnicas extranjeras: solo el pescado fresco de la mañana, sal de roca, manteca bien templada y el amor por la tierra fría.
+          </p>
+
+          <div class="tip-card">
+            <span class="tip-badge">💡 Consejo de Doña Luz:</span>
+            <p>«El verdadero secreto no es el fuego alto, sino el cariño y la paciencia. La guapucha se voltea solo una vez, cuando la misma paila te avisa con su crujido suave.»</p>
+          </div>
+        </div>
+
+        <!-- Visor 3D de Doña Luz Mery -->
+        <div class="natural-card character-card-center">
+          <div class="char-header">
+            <span class="char-pill">Personaje 3D</span>
+            <h4 class="char-name">Doña Luz Mery</h4>
+            <span class="char-subtitle">Cocinera tradicional de Fúquene</span>
+          </div>
+          <div id="dona-luz-3d-main" class="character-3d-box"></div>
+          <span class="character-rot-hint">🖱️ Gira a Doña Luz con pañolón andino, delantal y cuchara de aliso</span>
+        </div>
       </div>
 
-      <div class="hex-node style-white" id="node-cocina" data-id="cocina" style="left: 17%; top: 465px;">
-        <svg class="hex-shape" viewBox="0 0 100 87">
-          <polygon points="50,2 98,23 98,64 50,85 2,64 2,23" />
-        </svg>
-        <span class="hex-label">Cocina</span>
+      <!-- Ingredientes Autóctonos -->
+      <div class="sub-block">
+        <h3 class="sub-block-title">🧺 Ingredientes Autóctonos Tradicionales</h3>
+        <div class="ingredients-clean-grid">
+          <div class="ingredient-box">
+            <span class="ing-emoji">🐟</span>
+            <h4>Guapuchas frescas</h4>
+            <p>Pescadas en la madrugada, limpias y firmes.</p>
+          </div>
+          <div class="ingredient-box">
+            <span class="ing-emoji">🌾</span>
+            <h4>Harina fina</h4>
+            <p>Capa ligera para sellar la crocancia exterior.</p>
+          </div>
+          <div class="ingredient-box">
+            <span class="ing-emoji">🧂</span>
+            <h4>Sal marina & cebolla</h4>
+            <p>El adobo rústico machacado en piedra de río.</p>
+          </div>
+          <div class="ingredient-box">
+            <span class="ing-emoji">🫒</span>
+            <h4>Manteca o aceite</h4>
+            <p>Fritura profunda en paila de hierro curada.</p>
+          </div>
+          <div class="ingredient-box">
+            <span class="ing-emoji">🥔</span>
+            <h4>Papas nativas</h4>
+            <p>Papas criollas cocidas con su piel dorada.</p>
+          </div>
+          <div class="ingredient-box">
+            <span class="ing-emoji">🍋</span>
+            <h4>Gotas de limón</h4>
+            <p>El toque cítrico fresco de la cordillera.</p>
+          </div>
+        </div>
       </div>
 
-      <div class="hex-node style-white" id="node-guapucha" data-id="guapucha" style="left: 11%; top: 575px;">
-        <svg class="hex-shape" viewBox="0 0 100 87">
-          <polygon points="50,2 98,23 98,64 50,85 2,64 2,23" />
-        </svg>
-        <span class="hex-label">Guapucha</span>
+      <!-- Paso a Paso de la Receta -->
+      <div class="sub-block">
+        <h3 class="sub-block-title">🔥 Paso a paso de la receta tradicional</h3>
+        <div class="steps-clean-grid">
+          <div class="recipe-step-box">
+            <span class="step-badge">Paso 1</span>
+            <h4>Lavado y salmuera suave</h4>
+            <p>Se lavan con agua fría de manantial y se dejan reposar en una salmuera ligera con gotas de limón para desflecar.</p>
+          </div>
+          <div class="recipe-step-box">
+            <span class="step-badge">Paso 2</span>
+            <h4>Enharinado ligero</h4>
+            <p>Se pasan suavemente por una fina capa de harina sazonada con comino, cebolla larga y sal, sacudiendo el exceso.</p>
+          </div>
+          <div class="recipe-step-box">
+            <span class="step-badge">Paso 3</span>
+            <h4>Fritura en paila de hierro</h4>
+            <p>En manteca bien caliente, se sumergen 3 a 4 minutos hasta obtener tono oro viejo y textura crujiente.</p>
+          </div>
+          <div class="recipe-step-box">
+            <span class="step-badge">Paso 4</span>
+            <h4>Emplatado tradicional</h4>
+            <p>Se sirven calientes en canastillos o platos de barro, acompañadas de papas criollas y rodajas de limón fresco.</p>
+          </div>
+        </div>
       </div>
 
-      <div class="hex-node style-white" id="node-maiz" data-id="maiz" style="left: 15%; top: 685px;">
-        <svg class="hex-shape" viewBox="0 0 100 87">
-          <polygon points="50,2 98,23 98,64 50,85 2,64 2,23" />
-        </svg>
-        <span class="hex-label">Maíz</span>
+      <!-- Minijuego Interactivo: ¡Arma tu plato! -->
+      <div class="natural-card game-wrapper" id="minijuego-plato">
+        <div class="game-top-bar">
+          <div>
+            <span class="game-tag">🎮 Minijuego Interactivo</span>
+            <h3 class="natural-card-title">¡Arma tu plato tradicional de Fúquene!</h3>
+            <p class="game-subtitle">Aprende a preparar el plato insigne de la laguna guiado por Doña Luz Mery.</p>
+          </div>
+          <div class="player-pill" id="game-player-name">Cocinero/a: Perla</div>
+        </div>
+
+        <!-- Pantalla 1: Selección de Personaje -->
+        <div id="game-intro-screen" class="game-screen active-screen">
+          <h4 class="game-prompt">1. Selecciona a tu personaje cocinero:</h4>
+          
+          <div class="char-select-grid">
+            <div class="character-select-card selected" data-char="perla">
+              <div class="avatar-large">👩‍🍳</div>
+              <h4>Perla</h4>
+              <p>Aprendiz entusiasta de cocina tradicional campesina</p>
+              <span class="select-btn-label">Seleccionada</span>
+            </div>
+
+            <div class="character-select-card" data-char="alejo">
+              <div class="avatar-large">🧑‍🍳</div>
+              <h4>Alejo</h4>
+              <p>Joven pescador y ayudante de fogón de la laguna</p>
+              <span class="select-btn-label">Seleccionar</span>
+            </div>
+
+            <div class="character-select-card" data-char="dona_luz">
+              <div class="avatar-large">👵</div>
+              <h4>Doña Luz Mery</h4>
+              <p>Maestra cocinera y custodia del fogón tradicional</p>
+              <span class="select-btn-label">Seleccionar</span>
+            </div>
+          </div>
+
+          <div class="center-action">
+            <button id="game-play-btn" class="btn-primary">
+              <span>¡Entrar a la cocina tradicional!</span>
+              <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Pantalla 2: Cocina Interactiva en Vivo -->
+        <div id="game-kitchen-screen" class="game-screen" style="display: none;">
+          <div class="kitchen-progress-track">
+            <div class="kitchen-progress-fill" id="game-progress-fill" style="width: 20%;"></div>
+          </div>
+
+          <div class="kitchen-interactive-layout">
+            <!-- Zona de Actividad Culinaria Interactiva (Generada dinámicamente según el paso) -->
+            <div id="kitchen-interactive-workspace" class="kitchen-activity-workspace"></div>
+
+            <!-- Diálogo y Consejos de Doña Luz Mery -->
+            <div class="kitchen-luz-guidance">
+              <div class="speech-bubble">
+                <span class="speech-author">Doña Luz Mery te guía en el fogón:</span>
+                <p id="game-luz-dialog">«Primero lavamos las guapuchas con agua fresca y las secamos bien para que al freír queden crocantes y no salpiquen.»</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pantalla 3: Plato Terminado & Felicitaciones -->
+        <div id="game-result-screen" class="game-screen" style="display: none;">
+          <div class="victory-box">
+            <span class="victory-emoji">🎉🍲✨</span>
+            <h4 class="victory-heading">¡Plato Servido a la Perfección!</h4>
+            <p class="victory-subtext">Has preparado una auténtica porción de guapuchas crocantes de Fúquene con el punto dorado exacto y acompañamientos campesinos tradicionales.</p>
+
+            <div class="victory-plate-card">
+              <!-- Doña Luz Mery 3D felicitando al cocinero -->
+              <div id="dona-luz-winner-3d" class="winner-3d-box"></div>
+
+              <div class="plate-dish-center">
+                <span id="victory-dish-emojis" class="victory-plate-emojis" style="font-size: 3.2rem;">🐟 🥔 🍋 🍌 🐟</span>
+              </div>
+
+              <!-- Puntuación y desglose de estrellas -->
+              <div class="score-breakdown-card">
+                <div class="stars-row">⭐⭐⭐⭐⭐ <strong>5 / 5 Estrellas</strong></div>
+                <div class="score-items-grid">
+                  <span class="score-item">✨ Limpieza: <strong>100%</strong></span>
+                  <span class="score-item">🧂 Sazón en piedra: <strong>100%</strong></span>
+                  <span class="score-item">🔥 Crocancia en paila: <strong>100%</strong></span>
+                  <span class="score-item">🥔 Tradición andina: <strong>100%</strong></span>
+                </div>
+              </div>
+
+              <div class="plate-speech">
+                <strong>Doña Luz Mery dice con orgullo:</strong>
+                <p id="victory-luz-review">«¡Benditas tus manos! Has cocinado con respeto por la laguna y con el sazón de nuestros abuelos. Este plato merece compartirse con toda la comunidad.»</p>
+              </div>
+            </div>
+
+            <div class="victory-buttons">
+              <button id="game-restart-btn" class="btn-primary">
+                <span>Cocinar otro plato</span>
+              </button>
+              <button id="game-copy-recipe-btn" class="btn-secondary">
+                <span>📋 Copiar receta de Doña Luz</span>
+              </button>
+              <a href="#encuesta" class="btn-secondary">
+                <span>Continuar a la Encuesta &rarr;</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 6: RED DE SABERES (INFOGRAFÍA HEXAGONAL INTERACTIVA) -->
+    <section class="content-section" id="red-de-saberes">
+      <div class="section-header">
+        <span class="section-tag">🕸️ Explorador Biocultural</span>
+        <h2 class="section-title">Red de Saberes de la Laguna</h2>
+        <p class="section-desc">Navega a través de las conexiones conceptuales y saberes ancestrales de la cuenca hídrica de Fúquene. Haz clic en cualquier nodo para abrir su archivo de memoria.</p>
       </div>
 
-      <!-- RAMA 2: CENTRO-IZQUIERDA (IDENTIDAD Y BIOLOGÍA) -->
-      <div class="hex-node style-white" id="node-que-es" data-id="que-es" style="left: 39%; top: 220px;">
-        <svg class="hex-shape" viewBox="0 0 100 87">
-          <polygon points="50,2 98,23 98,64 50,85 2,64 2,23" />
-        </svg>
-        <span class="hex-label">¿Qué es?</span>
+      <div class="infographic-scroll-wrapper" id="infographic-wrapper">
+        <main class="infographic-canvas" id="infographic-board">
+          <!-- Lienzo SVG para las líneas de conexión dinámicas (colocado detrás) -->
+          <svg id="connections-svg"></svg>
+
+          <!-- Nodos Hexagonales Estilizados -->
+          <div class="hex-node style-blue" id="node-inicio" data-id="inicio" style="left: 17%; top: 75px;">
+            <svg class="hex-shape" viewBox="0 0 100 87"><polygon points="50,2 98,23 98,64 50,85 2,64 2,23" /></svg>
+            <span class="hex-label">Inicio</span>
+          </div>
+
+          <div class="hex-node style-blue" id="node-donde-estamos" data-id="donde-estamos" style="left: 27%; top: 145px;">
+            <svg class="hex-shape" viewBox="0 0 100 87"><polygon points="50,2 98,23 98,64 50,85 2,64 2,23" /></svg>
+            <span class="hex-label">¿Donde<br>estamos?</span>
+          </div>
+
+          <div class="hex-node style-blue" id="node-que-es-guapucha" data-id="que-es-guapucha" style="left: 39%; top: 85px;">
+            <svg class="hex-shape" viewBox="0 0 100 87"><polygon points="50,2 98,23 98,64 50,85 2,64 2,23" /></svg>
+            <span class="hex-label">¿Qué es una<br>guapucha?</span>
+          </div>
+
+          <div class="hex-node style-blue" id="node-del-agua-al-plato" data-id="del-agua-al-plato" style="left: 51%; top: 145px;">
+            <svg class="hex-shape" viewBox="0 0 100 87"><polygon points="50,2 98,23 98,64 50,85 2,64 2,23" /></svg>
+            <span class="hex-label">Del agua al<br>plato</span>
+          </div>
+
+          <div class="hex-node style-blue" id="node-escucha-el-territorio" data-id="escucha-el-territorio" style="left: 21%; top: 310px;">
+            <svg class="hex-shape" viewBox="0 0 100 87"><polygon points="50,2 98,23 98,64 50,85 2,64 2,23" /></svg>
+            <span class="hex-label">Escucha el<br>territorio</span>
+          </div>
+
+          <div class="hex-node style-blue" id="node-agua" data-id="agua" style="left: 33%; top: 380px;">
+            <svg class="hex-shape" viewBox="0 0 100 87"><polygon points="50,2 98,23 98,64 50,85 2,64 2,23" /></svg>
+            <span class="hex-label">Agua</span>
+          </div>
+
+          <div class="hex-node style-blue" id="node-que-es" data-id="que-es" style="left: 45%; top: 310px;">
+            <svg class="hex-shape" viewBox="0 0 100 87"><polygon points="50,2 98,23 98,64 50,85 2,64 2,23" /></svg>
+            <span class="hex-label">¿Qué es?</span>
+          </div>
+
+          <div class="hex-node style-blue" id="node-no-esta-en-un-libro" data-id="no-esta-en-un-libro" style="left: 57%; top: 380px;">
+            <svg class="hex-shape" viewBox="0 0 100 87"><polygon points="50,2 98,23 98,64 50,85 2,64 2,23" /></svg>
+            <span class="hex-label">No está en<br>un libro</span>
+          </div>
+
+          <div class="hex-node style-blue" id="node-preparacion" data-id="preparacion" style="left: 69%; top: 310px;">
+            <svg class="hex-shape" viewBox="0 0 100 87"><polygon points="50,2 98,23 98,64 50,85 2,64 2,23" /></svg>
+            <span class="hex-label">Preparación</span>
+          </div>
+
+          <!-- Nodos Blancos Subordinados -->
+          <div class="hex-node style-white" id="node-territorio-comunidad" data-id="territorio-comunidad" style="left: 17%; top: 510px;">
+            <svg class="hex-shape" viewBox="0 0 100 87"><polygon points="50,2 98,23 98,64 50,85 2,64 2,23" /></svg>
+            <span class="hex-label">Territorio y<br>comunidad</span>
+          </div>
+
+          <div class="hex-node style-white" id="node-cocina" data-id="cocina" style="left: 17%; top: 670px;">
+            <svg class="hex-shape" viewBox="0 0 100 87"><polygon points="50,2 98,23 98,64 50,85 2,64 2,23" /></svg>
+            <span class="hex-label">Cocina</span>
+          </div>
+
+          <div class="hex-node style-white" id="node-guapucha" data-id="guapucha" style="left: 23%; top: 785px;">
+            <svg class="hex-shape" viewBox="0 0 100 87"><polygon points="50,2 98,23 98,64 50,85 2,64 2,23" /></svg>
+            <span class="hex-label">Guapucha</span>
+          </div>
+
+          <div class="hex-node style-white" id="node-maiz" data-id="maiz" style="left: 35%; top: 830px;">
+            <svg class="hex-shape" viewBox="0 0 100 87"><polygon points="50,2 98,23 98,64 50,85 2,64 2,23" /></svg>
+            <span class="hex-label">Maíz</span>
+          </div>
+
+          <div class="hex-node style-white" id="node-importancia" data-id="importancia" style="left: 39%; top: 460px;">
+            <svg class="hex-shape" viewBox="0 0 100 87"><polygon points="50,2 98,23 98,64 50,85 2,64 2,23" /></svg>
+            <span class="hex-label">Importancia</span>
+          </div>
+
+          <div class="hex-node style-white" id="node-historia" data-id="historia" style="left: 39%; top: 610px;">
+            <svg class="hex-shape" viewBox="0 0 100 87"><polygon points="50,2 98,23 98,64 50,85 2,64 2,23" /></svg>
+            <span class="hex-label">Historia</span>
+          </div>
+
+          <div class="hex-node style-white" id="node-tradicion" data-id="tradicion" style="left: 47%; top: 710px;">
+            <svg class="hex-shape" viewBox="0 0 100 87"><polygon points="50,2 98,23 98,64 50,85 2,64 2,23" /></svg>
+            <span class="hex-label">Tradición</span>
+          </div>
+
+          <div class="hex-node style-white" id="node-saberes" data-id="saberes" style="left: 77%; top: 430px;">
+            <svg class="hex-shape" viewBox="0 0 100 87"><polygon points="50,2 98,23 98,64 50,85 2,64 2,23" /></svg>
+            <span class="hex-label">Saberes</span>
+          </div>
+
+          <div class="hex-node style-white" id="node-receta-tradicional" data-id="receta-tradicional" style="left: 77%; top: 575px;">
+            <svg class="hex-shape" viewBox="0 0 100 87"><polygon points="50,2 98,23 98,64 50,85 2,64 2,23" /></svg>
+            <span class="hex-label">Receta<br>tradicional</span>
+          </div>
+
+          <div class="hex-node style-white" id="node-cronica" data-id="cronica" style="left: 55%; top: 510px;">
+            <svg class="hex-shape" viewBox="0 0 100 87"><polygon points="50,2 98,23 98,64 50,85 2,64 2,23" /></svg>
+            <span class="hex-label">Crónica</span>
+          </div>
+
+          <div class="hex-node style-white" id="node-el-encuentro-con-la-guapucha" data-id="el-encuentro-con-la-guapucha" style="left: 63%; top: 595px;">
+            <svg class="hex-shape" viewBox="0 0 100 87"><polygon points="50,2 98,23 98,64 50,85 2,64 2,23" /></svg>
+            <span class="hex-label">El encuentro<br>con la guapucha</span>
+          </div>
+
+          <div class="hex-node style-white" id="node-voces-del-territorio" data-id="voces-del-territorio" style="left: 57%; top: 725px;">
+            <svg class="hex-shape" viewBox="0 0 100 87"><polygon points="50,2 98,23 98,64 50,85 2,64 2,23" /></svg>
+            <span class="hex-label">Voces del<br>territorio</span>
+          </div>
+
+          <div class="hex-node style-white" id="node-de-la-pesca-a-la-mesa" data-id="de-la-pesca-a-la-mesa" style="left: 67%; top: 785px;">
+            <svg class="hex-shape" viewBox="0 0 100 87"><polygon points="50,2 98,23 98,64 50,85 2,64 2,23" /></svg>
+            <span class="hex-label">De la pesca<br>a la mesa</span>
+          </div>
+
+          <div class="hex-node style-white" id="node-sabores-y-tradicion" data-id="sabores-y-tradicion" style="left: 77%; top: 725px;">
+            <svg class="hex-shape" viewBox="0 0 100 87"><polygon points="50,2 98,23 98,64 50,85 2,64 2,23" /></svg>
+            <span class="hex-label">Sabores y<br>tradición</span>
+          </div>
+
+          <div class="hex-node style-white" id="node-una-tradicion-que-permanece" data-id="una-tradicion-que-permanece" style="left: 75%; top: 865px;">
+            <svg class="hex-shape" viewBox="0 0 100 87"><polygon points="50,2 98,23 98,64 50,85 2,64 2,23" /></svg>
+            <span class="hex-label">Una tradición<br>que permanece</span>
+          </div>
+        </main>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 7: ENCUESTA – GUAPUCHAS: LATIDOS DE FÚQUENE -->
+    <section class="content-section" id="encuesta">
+      <div class="section-header">
+        <span class="section-tag">📝 Evaluación & Diálogo</span>
+        <h2 class="section-title">Encuesta – Guapuchas: Latidos de Fúquene</h2>
+        <p class="section-desc">Ayúdanos a evaluar el impacto de este recorrido cultural y ecológico respondiendo 5 breves preguntas.</p>
       </div>
 
-      <div class="hex-node style-white" id="node-importancia" data-id="importancia" style="left: 34.5%; top: 325px;">
-        <svg class="hex-shape" viewBox="0 0 100 87">
-          <polygon points="50,2 98,23 98,64 50,85 2,64 2,23" />
-        </svg>
-        <span class="hex-label">Importancia</span>
+      <div class="natural-card survey-box">
+        <form id="survey-form">
+          <!-- Pregunta 1 -->
+          <div class="question-block">
+            <h4 class="question-text">1. ¿Sabías de la existencia de la guapucha antes de visitar este sitio web?</h4>
+            <div class="options-list">
+              <label class="option-label"><input type="radio" name="q1" value="si" required><span>Sí, la conocía muy bien</span></label>
+              <label class="option-label"><input type="radio" name="q1" value="breve"><span>Había oído hablar de ella brevemente</span></label>
+              <label class="option-label"><input type="radio" name="q1" value="no"><span>No, no la conocía para nada</span></label>
+            </div>
+          </div>
+
+          <!-- Pregunta 2 -->
+          <div class="question-block">
+            <h4 class="question-text">2. ¿Qué aspecto te pareció más valioso del recorrido interactivo?</h4>
+            <div class="options-list">
+              <label class="option-label"><input type="radio" name="q2" value="3d" required><span>Los personajes y modelos 3D interactivos</span></label>
+              <label class="option-label"><input type="radio" name="q2" value="audio"><span>Los testimonios y audios de los pescadores</span></label>
+              <label class="option-label"><input type="radio" name="q2" value="juego"><span>La receta tradicional y el minijuego de cocina</span></label>
+              <label class="option-label"><input type="radio" name="q2" value="datos"><span>Los datos ecológicos y de distribución de la laguna</span></label>
+            </div>
+          </div>
+
+          <!-- Pregunta 3 -->
+          <div class="question-block">
+            <h4 class="question-text">3. ¿Consideras importante salvaguardar la gastronomía asociada a especies nativas como la guapucha?</h4>
+            <div class="options-list">
+              <label class="option-label"><input type="radio" name="q3" value="totalmente" required><span>Totalmente de acuerdo, es patrimonio biocultural</span></label>
+              <label class="option-label"><input type="radio" name="q3" value="conservacion"><span>De acuerdo, pero priorizando la conservación ecológica</span></label>
+              <label class="option-label"><input type="radio" name="q3" value="neutral"><span>Neutral</span></label>
+              <label class="option-label"><input type="radio" name="q3" value="desacuerdo"><span>En desacuerdo</span></label>
+            </div>
+          </div>
+
+          <!-- Pregunta 4 -->
+          <div class="question-block">
+            <h4 class="question-text">4. ¿Visitarías la Laguna de Fúquene para conocer su comunidad y probar sus platos tradicionales?</h4>
+            <div class="options-list">
+              <label class="option-label"><input type="radio" name="q4" value="si_definitivo" required><span>¡Definitivamente sí!</span></label>
+              <label class="option-label"><input type="radio" name="q4" value="vacaciones"><span>Probablemente sí en mis próximas vacaciones</span></label>
+              <label class="option-label"><input type="radio" name="q4" value="ecoturismo"><span>Tal vez, si hay más oferta ecoturística guiada</span></label>
+              <label class="option-label"><input type="radio" name="q4" value="no"><span>No por el momento</span></label>
+            </div>
+          </div>
+
+          <!-- Pregunta 5 -->
+          <div class="question-block">
+            <h4 class="question-text">5. ¿Cómo calificarías tu experiencia general en esta plataforma?</h4>
+            <div class="options-list rating-row">
+              <label class="option-label"><input type="radio" name="q5" value="5" required><span>⭐⭐⭐⭐⭐ Excelente</span></label>
+              <label class="option-label"><input type="radio" name="q5" value="4"><span>⭐⭐⭐⭐ Muy buena</span></label>
+              <label class="option-label"><input type="radio" name="q5" value="3"><span>⭐⭐⭐ Buena</span></label>
+              <label class="option-label"><input type="radio" name="q5" value="2"><span>⭐⭐ Regular</span></label>
+            </div>
+          </div>
+
+          <div class="center-action">
+            <button type="submit" class="btn-primary">Enviar Encuesta</button>
+            <div id="survey-feedback" class="feedback-box" style="display: none;">
+              ¡Muchas gracias por tus respuestas! Tus aportes ayudan a visibilizar y salvaguardar el patrimonio vivo de la Laguna de Fúquene.
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 8: CONTACTOS – DETRÁS DE LAS GUAPUCHAS -->
+    <section class="content-section" id="contactos">
+      <div class="section-header">
+        <span class="section-tag">💌 Comunidad & Colaboración</span>
+        <h2 class="section-title">Contactos – Detrás de las Guapuchas</h2>
+        <p class="section-desc">El equipo, la comunidad y los guardianes que hacen posible salvaguardar este legado.</p>
       </div>
 
-      <div class="hex-node style-white" id="node-historia" data-id="historia" style="left: 36.5%; top: 435px;">
-        <svg class="hex-shape" viewBox="0 0 100 87">
-          <polygon points="50,2 98,23 98,64 50,85 2,64 2,23" />
-        </svg>
-        <span class="hex-label">Historia</span>
+      <div class="two-columns-layout">
+        <!-- Agradecimientos y Origen -->
+        <div class="natural-card">
+          <h3 class="natural-card-title">Homenaje a la Ribera de Fúquene</h3>
+          <p class="contacts-paragraph">
+            Este proyecto nace del amor por la Laguna de Fúquene, sus aguas andinas y las manos trabajadoras de las familias pescadoras y cocineras que custodian la memoria de la guapucha. Es un homenaje biocultural digital para conectar a las nuevas generaciones con nuestras raíces vivas.
+          </p>
+
+          <h4 class="contacts-subtitle">Agradecimientos Especiales:</h4>
+          <ul class="contacts-list">
+            <li>🐟 Comunidad de pescadores artesanales de la Laguna de Fúquene y Guachetá.</li>
+            <li>👵 Doña Luz Mery y las maestras cocineras de la cuenca del río Suárez.</li>
+            <li>🌿 Colectivos ambientales y guardianes ecológicos del altiplano cundiboyacense.</li>
+            <li>🔬 Biólogos e investigadores dedicados a la protección de <em>Grundulus bogotensis</em>.</li>
+          </ul>
+        </div>
+
+        <!-- Formulario "Nos puedes dar una idea plis" -->
+        <div class="natural-card">
+          <h3 class="natural-card-title">Nos puedes dar una idea plis ✨</h3>
+          <p class="contacts-paragraph">¿Tienes una anécdota, una receta familiar, fotos antiguas o una sugerencia para enriquecer este espacio? ¡Escríbenos tu idea!</p>
+
+          <form id="idea-form" class="clean-form">
+            <div class="form-field">
+              <label for="idea-name">Tu nombre:</label>
+              <input type="text" id="idea-name" required placeholder="Ej. Camila Morales">
+            </div>
+
+            <div class="form-field">
+              <label for="idea-email">Correo electrónico de contacto:</label>
+              <input type="email" id="idea-email" required placeholder="correo@ejemplo.com">
+            </div>
+
+            <div class="form-field">
+              <label for="idea-text">Tu idea o mensaje para la comunidad:</label>
+              <textarea id="idea-text" rows="3" required placeholder="Escribe aquí tu aporte, anécdota o sugerencia..."></textarea>
+            </div>
+
+            <button type="submit" class="btn-primary">Enviar Idea con Cariño 💌</button>
+            
+            <div id="idea-feedback" class="feedback-box" style="display: none;">
+              ¡Recibimos tu idea con el corazón! Gracias por sumarte al cuidado de Fúquene.
+            </div>
+          </form>
+        </div>
       </div>
-
-      <div class="hex-node style-white" id="node-tradicion" data-id="tradicion" style="left: 32.5%; top: 545px;">
-        <svg class="hex-shape" viewBox="0 0 100 87">
-          <polygon points="50,2 98,23 98,64 50,85 2,64 2,23" />
-        </svg>
-        <span class="hex-label">Tradición</span>
-      </div>
-
-      <!-- RAMA 3: CENTRO-DERECHA (COCINA Y SABERES) -->
-      <div class="hex-node style-white" id="node-preparacion" data-id="preparacion" style="left: 54%; top: 265px;">
-        <svg class="hex-shape" viewBox="0 0 100 87">
-          <polygon points="50,2 98,23 98,64 50,85 2,64 2,23" />
-        </svg>
-        <span class="hex-label">Preparación</span>
-      </div>
-
-      <div class="hex-node style-white" id="node-saberes" data-id="saberes" style="left: 50.5%; top: 375px;">
-        <svg class="hex-shape" viewBox="0 0 100 87">
-          <polygon points="50,2 98,23 98,64 50,85 2,64 2,23" />
-        </svg>
-        <span class="hex-label">Saberes</span>
-      </div>
-
-      <div class="hex-node style-white" id="node-receta-tradicional" data-id="receta-tradicional" style="left: 54.5%; top: 485px;">
-        <svg class="hex-shape" viewBox="0 0 100 87">
-          <polygon points="50,2 98,23 98,64 50,85 2,64 2,23" />
-        </svg>
-        <span class="hex-label">Receta<br>tradicional</span>
-      </div>
-
-      <!-- RAMA 4: DERECHA (CRÓNICA, MEMORIA Y PESCADORES) -->
-      <div class="hex-node style-white" id="node-cronica" data-id="cronica" style="left: 71%; top: 215px;">
-        <svg class="hex-shape" viewBox="0 0 100 87">
-          <polygon points="50,2 98,23 98,64 50,85 2,64 2,23" />
-        </svg>
-        <span class="hex-label">Cronica</span>
-      </div>
-
-      <div class="hex-node style-white" id="node-el-encuentro-con-la-guapucha" data-id="el-encuentro-con-la-guapucha" style="left: 74.5%; top: 325px;">
-        <svg class="hex-shape" viewBox="0 0 100 87">
-          <polygon points="50,2 98,23 98,64 50,85 2,64 2,23" />
-        </svg>
-        <span class="hex-label">El encuentro<br>con la<br>guapucha</span>
-      </div>
-
-      <div class="hex-node style-white" id="node-voces-del-territorio" data-id="voces-del-territorio" style="left: 77%; top: 435px;">
-        <svg class="hex-shape" viewBox="0 0 100 87">
-          <polygon points="50,2 98,23 98,64 50,85 2,64 2,23" />
-        </svg>
-        <span class="hex-label">Voces del<br>territorio</span>
-      </div>
-
-      <div class="hex-node style-white" id="node-de-la-pesca-a-la-mesa" data-id="de-la-pesca-a-la-mesa" style="left: 75%; top: 545px;">
-        <svg class="hex-shape" viewBox="0 0 100 87">
-          <polygon points="50,2 98,23 98,64 50,85 2,64 2,23" />
-        </svg>
-        <span class="hex-label">De la pesca a<br>la mesa</span>
-      </div>
-
-      <div class="hex-node style-white" id="node-sabores-y-tradicion" data-id="sabores-y-tradicion" style="left: 76.5%; top: 655px;">
-        <svg class="hex-shape" viewBox="0 0 100 87">
-          <polygon points="50,2 98,23 98,64 50,85 2,64 2,23" />
-        </svg>
-        <span class="hex-label">Sabores y<br>tradición</span>
-      </div>
-
-      <div class="hex-node style-white" id="node-una-tradicion-que-permanece" data-id="una-tradicion-que-permanece" style="left: 75%; top: 765px;">
-        <svg class="hex-shape" viewBox="0 0 100 87">
-          <polygon points="50,2 98,23 98,64 50,85 2,64 2,23" />
-        </svg>
-        <span class="hex-label">Una tradición<br>que permanece</span>
-      </div>
-
-      </main>
-    </div>
-
-    <!-- Indicador de navegación táctil para pantallas móviles -->
-    <div class="mobile-scroll-hint" id="mobile-hint">
-      <span>👈 Desliza para explorar la laguna • Toca para abrir detalles 👉</span>
-    </div>
+    </section>
 
     <!-- Notificación / Toast de estado interactivo -->
     <div id="fish-toast" class="fish-toast">
-      <span id="toast-text">¡Toca el agua o acerca el cursor a las Guapuchas para interactuar!</span>
+      <span id="toast-text">¡Bienvenido a Guapuchas: Latidos de Fúquene!</span>
     </div>
 
-    <!-- Pie de página con créditos bioculturales -->
+    <!-- Pie de página sobrio y natural -->
     <footer class="footer-note">
-      Investigación y Salvaguarda Biocultural de la Laguna de Fúquene • <em>Grundulus bogotensis</em> • Altiplano Cundiboyacense
+      <div class="footer-inner">
+        <p><strong>Guapuchas: Latidos de Fúquene</strong> • Divulgación Biocultural y Memoria Gastronómica Campesina</p>
+        <p class="footer-sub">Laguna de Fúquene • <em>Grundulus bogotensis</em> • Cundinamarca & Boyacá, Colombia</p>
+      </div>
     </footer>
   </div>
 
-  <!-- Modal Emergente de Contenido -->
+  <!-- Modal Emergente de Contenido para Nodos Hexagonales -->
   <div id="content-modal" class="modal-overlay">
     <div class="modal-card">
       <div class="modal-header">
         <span class="modal-badge" id="modal-badge">Punto de Partida</span>
-        <button id="modal-close" class="modal-close-btn" title="Cerrar">
+        <button id="modal-close" class="modal-close-btn" title="Cerrar ventana">
           <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
         </button>
         <h2 class="modal-title" id="modal-title">Título del Nodo</h2>
@@ -279,13 +1043,13 @@
       </div>
       <div class="modal-body">
         <div id="modal-custom-audio" style="display: none;">
-          <div class="audio-player-box">
+          <div class="modal-audio-box">
             <div class="audio-info">
               <span class="audio-track-title">Paisaje Sonoro de Fúquene</span>
               <span class="audio-track-desc">Remero, viento andino y murmullo de juncales</span>
             </div>
-            <button id="modal-audio-btn" class="audio-play-toggle">
-              <svg style="width: 18px; height: 18px; fill: currentColor;" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            <button id="modal-audio-btn" class="btn-primary-small">
+              <svg style="width: 16px; height: 16px; fill: currentColor;" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
               <span>Escuchar</span>
             </button>
           </div>
@@ -293,9 +1057,7 @@
 
         <div id="modal-text">Contenido detallado...</div>
 
-        <div class="modal-stats" id="modal-stats">
-          <!-- Estadísticas inyectadas dinámicamente -->
-        </div>
+        <div class="modal-stats" id="modal-stats"></div>
 
         <div class="modal-quote" id="modal-quote">
           "Cita memorable..."
@@ -304,12 +1066,14 @@
     </div>
   </div>
 
-  <!-- Scripts del proyecto -->
+  <!-- Scripts del proyecto en orden de dependencia -->
   <script src="js/data.js"></script>
   <script src="js/audio.js"></script>
   <script src="js/guapucha.js"></script>
+  <script src="js/characters.js"></script>
   <script src="js/water.js"></script>
   <script src="js/bubbles.js"></script>
+  <script src="js/game.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
